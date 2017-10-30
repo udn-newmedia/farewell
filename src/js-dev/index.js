@@ -1895,16 +1895,20 @@ $(document).ready(function () {
         e.preventDefault();
         $.fn.fullpage.setAutoScrolling(false);
         $.fn.fullpage.setFitToSection(false);
-        $("html, body").animate({
-            scrollTop: $(".content").eq(0).offset().top
-        }, 888);
+        setTimeout(function(){
+            $(this).css({ "display": "none", "opacity": 0 });
+            $(".fixed_pic").css({ "opacity": 0 });
+            $("html, body").animate({
+                scrollTop: $(".content").eq(0).offset().top
+            }, 888);            
+        }, 888)
+        console.log("333")
         ga("send", {
             "hitType": "event",
             "eventCategory": "skip",
             "eventAction": "click",
             "eventLabel": "直接看報導(skip)"
         });
-        $(this).css({ "display": "none", "opacity": 0 });
-        $(".fixed_pic").css({ "opacity": 0 });
+
     });
 });

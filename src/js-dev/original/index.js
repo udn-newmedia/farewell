@@ -21,6 +21,8 @@ $(document).ready(function () {
     var SIDdrawDoctor;
     var SIDdrawCpu;
     var animeIndex;
+    var toSkip = false
+
 
     var scroll_now;
     var read_progress = 10;
@@ -1273,6 +1275,7 @@ $(document).ready(function () {
         lazyLoading: true,
         afterLoad: function (anchorLink, index) {
             animeIndex = index;
+            console.log(index)
             $.fn.fullpage.setAllowScrolling(false);
             $("#section-" + index).css({
                 "opacity": "1",
@@ -1290,16 +1293,21 @@ $(document).ready(function () {
             });
             if (index == 1) {
                 setTimeout(function(){
-                    $(window).scrollTop(0);    
+                    $(window).scrollTop(0);
+                    console.log("33")    
                 }, 1500)
                 $("#stage-1")[0].play();
                 $(".fixed_pic").css("opacity", "1");
+                $(".fullpage").css({
+                    "height": "100%"
+                })
                 $.fn.fullpage.setAutoScrolling(true);
                 $.fn.fullpage.setAllowScrolling(true);
                 $.fn.fullpage.setFitToSection(true);
                 $.fn.fullpage.setScrollingSpeed(777);
                 start.src = "src/image/animate-sprite/stage-2-start.jpg";
-                end.src = "src/image/animate-sprite/stage-2-end.jpg";                
+                end.src = "src/image/animate-sprite/stage-2-end.jpg";       
+                toSkip = false;         
                 if (localStorage.getItem("udn-readed") !== null) {
                     $(".skip").css({
                         "display": "block",
@@ -1631,46 +1639,47 @@ $(document).ready(function () {
                 washCurFrame = 0;
                 $(".stage-12-words p").removeAttr('style');
                 $("#stage-12").removeAttr('style');
+                if(toSkip == false) {
+                    console.log("noSkip!!")
+                    $(".stage-13").eq(0).css({
+                        "opacity": "1"
+                    });
+                    $(".stage-13-words").css({
+                        "transform": "translate(0, -20%)",
+                        "opacity": 1
+                    });
+                    // $("html, body").css({
+                    //     "overflow-x": "hidden",
+                    //     "height": "initail"
+                    // });
+                    setTimeout(function () {
+                        $(".stage-13").eq(1).css({
+                            "opacity": "1"
+                        });
+                        $(".stage-13-words h2").css({
+                            "opacity": "1"
+                        });
+                    }, 1666);
+                    setTimeout(function () {
+                        $(".stage-13").eq(2).css({
+                            "opacity": "1"
+                        });    
+                        if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
+                            $(".skip").css({
+                                "display": "block",
+                            });                        
+                        }
+                    }, 3333);
+                    setTimeout(function(){
+                        if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
+                            $(".skip").css({
+                                "opacity": 1,
+                            });                        
+                        }  
+                    }, 3500)
+                localStorage.setItem("udn-readed", "readed");                    
+                }
 
-                $(".stage-13").eq(0).css({
-                    "opacity": "1"
-                });
-                $(".stage-13-words").css({
-                    "transform": "translate(0, -20%)",
-                    "opacity": 1
-                });
-                // $.fn.fullpage.setAutoScrolling(false);
-                // $.fn.fullpage.setFitToSection(false);
-                $("html, body").css({
-                    "overflow-x": "hidden",
-                    "height": "initail"
-                });
-                setTimeout(function () {
-                    $(".stage-13").eq(1).css({
-                        "opacity": "1"
-                    });
-                    $(".stage-13-words h2").css({
-                        "opacity": "1"
-                    });
-                }, 1666);
-                setTimeout(function () {
-                    $(".stage-13").eq(2).css({
-                        "opacity": "1"
-                    });    
-                    if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
-                        $(".skip").css({
-                            "display": "block",
-                        });                        
-                    }                                    
-                }, 3333);
-                setTimeout(function(){
-                    if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
-                        $(".skip").css({
-                            "opacity": 1,
-                        });                        
-                    }  
-                }, 3500)
-                localStorage.setItem("udn-readed", "readed");
             }
         },
         onLeave: function (index, nextIndex, direction) {
@@ -1892,12 +1901,20 @@ $(document).ready(function () {
         }
     });
     $(".skip").click(function (e) {
-        e.preventDefault();
+        toSkip = true
         $.fn.fullpage.setAutoScrolling(false);
-        $.fn.fullpage.setFitToSection(false);
+        $.fn.fullpage.setFitToSection(false);        
+        e.preventDefault();
+        $(".fullpage").css({
+            'height': "0",
+        })        
+        $("html, body").css({
+             "overflow-x": "hidden",
+             "height": "initail"
+        });        
         $("html, body").animate({
             scrollTop: $(".content").eq(0).offset().top
-        }, 888);
+        }, 1000);                    
         ga("send", {
             "hitType": "event",
             "eventCategory": "skip",
@@ -1906,5 +1923,6 @@ $(document).ready(function () {
         });
         $(this).css({ "display": "none","opacity": 0,});
         $(".fixed_pic").css({ "opacity": 0 });
+        console.log("####")
     });
 });
