@@ -113,7 +113,8 @@
     display: block;
     z-index: 999;
     text-align: center;
-    cursor: pointer;   
+    cursor: pointer;  
+    margin-right: 20px; 
     img{
         width: 80px;
         max-height: 100%;
@@ -772,6 +773,12 @@
             }
             .stage-10-box{
                 width: 50%;
+                .bouzu{
+                    top: 5%;
+                }
+                .taxi{
+                    top: 5%;
+                }
             }
             #stage-10{
                 max-width: 100%;
