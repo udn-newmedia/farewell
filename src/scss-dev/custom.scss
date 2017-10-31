@@ -88,7 +88,7 @@
         height: auto;
     }
 }
-.skip{
+.readPaper{
     display: none;
     position: fixed;
     z-index: 999;
@@ -109,6 +109,16 @@
         color: #fff;
     }
 }
+.skip{
+    display: block;
+    z-index: 999;
+    text-align: center;
+    cursor: pointer;   
+    img{
+        width: 80px;
+        max-height: 100%;
+    }    
+}
 .downArrow{
     display: none;
     position: fixed;
@@ -117,10 +127,12 @@
     bottom: 5%;
     margin-left: -10.28px;
     color: #fff;
-    animation-name: down;
-    animation-duration: .6s;
-    animation-iteration-count: infinite;
     cursor: pointer;
+    .fa-angle-down{
+        animation-name: down;
+        animation-duration: .6s;
+        animation-iteration-count: infinite;
+    }
 }
 @keyframes down {
     from{
@@ -133,6 +145,7 @@
 .whiteP{
     flex: 0;
     color: #fff;
+    line-height: 1.5;
 }
 .whiteHead{
     color: #fff;

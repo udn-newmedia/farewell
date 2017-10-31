@@ -21,8 +21,8 @@ $(document).ready(function () {
     var SIDdrawDoctor;
     var SIDdrawCpu;
     var animeIndex;
-    var toSkip = false
-
+    var toSkip = false;
+    var toFire = true;
 
     var scroll_now;
     var read_progress = 10;
@@ -93,7 +93,7 @@ $(document).ready(function () {
             $(".downArrow").css({
                 "bottom": "158px",
             });
-            $(".skip").css({
+            $(".readPaper").css({
                 "bottom": "158px",
             });  
             $(".whiteP").css({
@@ -113,14 +113,14 @@ $(document).ready(function () {
                 $(".downArrow").css({
                     "bottom": "16px",
                 });
-                $(".skip").css({
+                $(".readPaper").css({
                     "bottom": "16px",
                 });           
             } else {
                 $(".downArrow").css({
                     "bottom": "143px",
                 });
-                $(".skip").css({
+                $(".readPaper").css({
                     "bottom": "143px",
                 });      
             }
@@ -535,6 +535,7 @@ $(document).ready(function () {
         ctx_2.imageSmoothingEnabled = false;
         ctx_2.globalAlpha = 1;
         ctx_2.drawImage(start, startSrcX, startSrcY, startWidth, startHeight, startX, startY, startWidth, startHeight);
+        console.log("start Working")
     }
 
     // ＥＮＤ
@@ -542,7 +543,7 @@ $(document).ready(function () {
     var endWidth = 375;
     var endHeight = 667;
     var endCurFrame = 0;
-    var endFrameCount = 25;
+    var endFrameCount = 22;
     var endSrcX = 0;
     var endSrcY = 0;
     var endX = 0;
@@ -553,6 +554,9 @@ $(document).ready(function () {
 
     function drawEnd() {
         //Updating the frame index 
+        endSrcY = endCurFrame * endHeight;
+        ctx_2.clearRect(endX, endY, endWidth, endHeight);
+        ctx_2.drawImage(end, endSrcX, endSrcY, endWidth, endHeight, endX, endY, endWidth, endHeight);
         if (endCurFrame == endFrameCount - 1) {
             clearInterval(SIDdrawEnd);
             ctx_2.clearRect(0, 0, stage_2.width, stage_2.height);
@@ -567,10 +571,8 @@ $(document).ready(function () {
             endCurFrame++;
         } else {
             endCurFrame++;
-        }
-        endSrcY = endCurFrame * endHeight;
-        ctx_2.clearRect(endX, endY, endWidth, endHeight);
-        ctx_2.drawImage(end, endSrcX, endSrcY, endWidth, endHeight, endX, endY, endWidth, endHeight);
+        }  
+        console.log("end Working")
     }
 
     //////stage-3
@@ -598,6 +600,7 @@ $(document).ready(function () {
     ctx_3.transform(.7, 0, 0, .7, 0, 0);
     function drawWalk1To() {
         //Updating the frame index 
+        console.log("walkTo Working")
         walk1CurFrame = ++walk1CurFrame % walk1FrameCount;
         walk1SrcY = walk1CurFrame * walk1Height;
         ctx_3.clearRect(walk1X, walk1Y, walk1Width, walk1Height);
@@ -683,6 +686,7 @@ $(document).ready(function () {
 
     function drawWalkBack() {
         //Updating the frame index 
+        console.log("walkBack Working")
         walkBackCurFrame = ++walkBackCurFrame % walkBackFrameCount;
         walkBackSrcY = walkBackCurFrame * walkBackHeight;
         ctx_3.clearRect(walkBackX, walkBackY, walkBackWidth, walkBackHeight);
@@ -761,6 +765,7 @@ $(document).ready(function () {
     ctx_4.transform(.8, 0, 0, .8, 0, 0);
     function drawKitchen() {
         //Updating the frame index 
+        console.log("kitchen Working")
         kitchenCurFrame = ++kitchenCurFrame % kitchenFrameCount;
         kitchenSrcY = kitchenCurFrame * kitchenHeight;
         ctx_4.clearRect(kitchenX, kitchenY, kitchenWidth + 10, kitchenHeight + 10);
@@ -791,6 +796,7 @@ $(document).ready(function () {
 
     function drawCar() {
         //Updating the frame index 
+        console.log("car Working")
         carCurFrame = ++carCurFrame % carFrameCount;
         carSrcY = carCurFrame * carHeight;
         ctx_5.clearRect(carX, carY, carWidth + 10, carHeight + 10);
@@ -825,6 +831,7 @@ $(document).ready(function () {
 
     function drawFoodInfo() {
         //Updating the frame index 
+        console.log("food Working")
         foodInfoCurFrame = ++foodInfoCurFrame % foodInfoFrameCount;
         foodInfoSrcY = foodInfoCurFrame * foodInfoHeight;
         ctx_6.clearRect(foodInfoX, foodInfoY, foodInfoWidth + 10, foodInfoHeight + 10);
@@ -857,6 +864,7 @@ $(document).ready(function () {
 
     function drawFoodSafe() {
         //Updating the frame index 
+        console.log("foodSafe Working")
         foodSafeCurFrame = ++foodSafeCurFrame % foodSafeFrameCount;
         foodSafeSrcY = foodSafeCurFrame * foodSafeHeight;
         ctx_6_1.clearRect(foodSafeX, foodSafeY, foodSafeWidth + 10, foodSafeHeight + 10);
@@ -892,7 +900,8 @@ $(document).ready(function () {
     var speech = new Image();
 
     function drawSpeech() {
-        //Updating the frame index 
+        //Updating the frame index
+        console.log("speech Working") 
         speechCurFrame = ++speechCurFrame % speechFrameCount;
         speechSrcY = speechCurFrame * speechHeight;
         ctx_6_2.clearRect(speechX, speechY, speechWidth + 10, speechHeight + 10);
@@ -950,6 +959,7 @@ $(document).ready(function () {
 
     function drawDoctor() {
         //Updating the frame index 
+        console.log("doctor Working") 
         doctorCurFrame = ++doctorCurFrame % doctorFrameCount;
         doctorSrcY = doctorCurFrame * doctorHeight;
         ctx_6_3.clearRect(doctorX, doctorY, doctorWidth, doctorHeight);
@@ -970,7 +980,8 @@ $(document).ready(function () {
     var labLocker = new Image();
 
     function drawCpu() {
-        //Updating the frame index 
+        //Updating the frame index
+        console.log("cpu Working")  
         cpuCurFrame = ++cpuCurFrame % cpuFrameCount;
         cpuSrcY = cpuCurFrame * cpuHeight;
         ctx_6_4.clearRect(cpuX, cpuY, cpuWidth, cpuHeight);
@@ -996,6 +1007,7 @@ $(document).ready(function () {
 
     function drawRoom() {
         //Updating the frame index 
+        console.log("room Working") 
         roomCurFrame = ++roomCurFrame % roomFrameCount;
         roomSrcY = roomCurFrame * roomHeight;
         ctx_7.clearRect(roomX, roomY, roomWidth + 10, roomHeight + 10);
@@ -1031,6 +1043,7 @@ $(document).ready(function () {
 
     function drawBed() {
         //Updating the frame index 
+        console.log("bed Working") 
         bedCurFrame = ++bedCurFrame % bedFrameCount;
         bedSrcY = bedCurFrame * bedHeight;
         ctx_8.clearRect(bedX, bedY, bedWidth, bedHeight);
@@ -1071,6 +1084,7 @@ $(document).ready(function () {
 
     function drawSmoke() {
         //Updating the frame index 
+        console.log("smoke Working") 
         smokeCurFrame = ++smokeCurFrame % smokeFrameCount;
         smokeSrcY = smokeCurFrame * smokeHeight;
         ctx_9.clearRect(smokeX, smokeY, smokeWidth + 10, smokeHeight + 10);
@@ -1102,7 +1116,8 @@ $(document).ready(function () {
     var stroll = new Image();
 
     function drawStroll() {
-        //Updating the frame index 
+        //Updating the frame index
+        console.log("stroll Working") 
         strollCurFrame = ++strollCurFrame % strollFrameCount;
         strollSrcY = strollCurFrame * strollHeight;
         ctx_10.clearRect(strollX, strollY, strollWidth + 10, strollHeight + 10);
@@ -1161,6 +1176,7 @@ $(document).ready(function () {
 
     function drawWave() {
         //Updating the frame index 
+        console.log("wave Working") 
         $("#music-stroll")[0].pause();
         waveCurFrame++;
         waveSrcY = waveCurFrame * waveHeight;
@@ -1210,7 +1226,8 @@ $(document).ready(function () {
     var man = new Image();
 
     function drawMan() {
-        //Updating the frame index 
+        //Updating the frame index
+        console.log("man Working")  
         manCurFrame = ++manCurFrame % manFrameCount;
         manSrcY = manCurFrame * manHeight;
         ctx_11.clearRect(manX, manY, manWidth + 10, manHeight + 10);
@@ -1229,7 +1246,8 @@ $(document).ready(function () {
     var woman = new Image();
 
     function drawWoman() {
-        //Updating the frame index 
+        //Updating the frame index
+        console.log("woman Working")  
         womanCurFrame = ++womanCurFrame % womanFrameCount;
         womanSrcY = womanCurFrame * womanHeight;
         ctx_11_1.clearRect(womanX, womanY, womanWidth + 10, womanHeight + 10);
@@ -1253,6 +1271,7 @@ $(document).ready(function () {
 
     function drawWash() {
         //Updating the frame index 
+        console.log("wash Working") 
         washCurFrame = ++washCurFrame % washFrameCount;
         washSrcY = washCurFrame * washHeight;
         ctx_12.clearRect(washX, washY, washWidth + 10, washHeight + 10);
@@ -1275,7 +1294,6 @@ $(document).ready(function () {
         lazyLoading: true,
         afterLoad: function (anchorLink, index) {
             animeIndex = index;
-            console.log(index)
             $.fn.fullpage.setAllowScrolling(false);
             $("#section-" + index).css({
                 "opacity": "1",
@@ -1292,33 +1310,24 @@ $(document).ready(function () {
                 "eventLabel": "看到第" + index + "張"
             });
             if (index == 1) {
-                setTimeout(function(){
-                    $(window).scrollTop(0);
-                    console.log("33")    
-                }, 1500)
+                $.fn.fullpage.setAutoScrolling(true);
+                $.fn.fullpage.setAllowScrolling(true);
+                $.fn.fullpage.setFitToSection(true);
+                $.fn.fullpage.setScrollingSpeed(777);                
+                $(window).scrollTop(0);   
                 $("#stage-1")[0].play();
                 $(".fixed_pic").css("opacity", "1");
                 $(".fullpage").css({
                     "height": "100%"
                 })
-                $.fn.fullpage.setAutoScrolling(true);
-                $.fn.fullpage.setAllowScrolling(true);
-                $.fn.fullpage.setFitToSection(true);
-                $.fn.fullpage.setScrollingSpeed(777);
+                $(".skip").css("display","block")
                 start.src = "src/image/animate-sprite/stage-2-start.jpg";
                 end.src = "src/image/animate-sprite/stage-2-end.jpg";       
                 toSkip = false;         
-                if (localStorage.getItem("udn-readed") !== null) {
-                    $(".skip").css({
-                        "display": "block",
-                        "opacity": 1,
-                    });
-                } else {
-                    $(".downArrow").css({
-                        "display": "block",
-                        "color": "white"
-                    });
-                }
+                $(".downArrow").css({
+                    "display": "block",
+                    "color": "white"
+                });
             }
             if (index == 2) {
                 walk1.src = "src/image/animate-sprite/stage-3-walk1.png";
@@ -1368,7 +1377,7 @@ $(document).ready(function () {
                     "transform": "translateX(0)",
                     "opacity": "1"
                 });
-
+                console.log(endCurFrame)
                 SIDdrawStart = setInterval(drawStart, 100);
             }
             if (index == 5) {
@@ -1380,6 +1389,7 @@ $(document).ready(function () {
                 ctx_2.clearRect(0, 0, stage_2.width, stage_2.height);
                 startCurFrame = 0;
                 endCurFrame = 0;
+                console.log(endCurFrame)
                 $("#stage-2").removeAttr('style');
                 $(".stage-2-words").removeAttr('style');
 
@@ -1640,7 +1650,6 @@ $(document).ready(function () {
                 $(".stage-12-words p").removeAttr('style');
                 $("#stage-12").removeAttr('style');
                 if(toSkip == false) {
-                    console.log("noSkip!!")
                     $(".stage-13").eq(0).css({
                         "opacity": "1"
                     });
@@ -1648,10 +1657,6 @@ $(document).ready(function () {
                         "transform": "translate(0, -20%)",
                         "opacity": 1
                     });
-                    // $("html, body").css({
-                    //     "overflow-x": "hidden",
-                    //     "height": "initail"
-                    // });
                     setTimeout(function () {
                         $(".stage-13").eq(1).css({
                             "opacity": "1"
@@ -1665,14 +1670,14 @@ $(document).ready(function () {
                             "opacity": "1"
                         });    
                         if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
-                            $(".skip").css({
+                            $(".readPaper").css({
                                 "display": "block",
                             });                        
                         }
                     }, 3333);
                     setTimeout(function(){
                         if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
-                            $(".skip").css({
+                            $(".readPaper").css({
                                 "opacity": 1,
                             });                        
                         }  
@@ -1687,7 +1692,7 @@ $(document).ready(function () {
             $(".downArrow").css({
                 "display": "none"
             });
-            $(".skip").css({
+            $(".readPaper").css({
                 "display": "none",
                 "opacity": 0,
             });
@@ -1901,28 +1906,63 @@ $(document).ready(function () {
         }
     });
     $(".skip").click(function (e) {
-        toSkip = true
-        $.fn.fullpage.setAutoScrolling(false);
-        $.fn.fullpage.setFitToSection(false);        
-        e.preventDefault();
-        $(".fullpage").css({
-            'height': "0",
-        })        
-        $("html, body").css({
-             "overflow-x": "hidden",
-             "height": "initail"
-        });        
-        $("html, body").animate({
-            scrollTop: $(".content").eq(0).offset().top
-        }, 1000);                    
-        ga("send", {
-            "hitType": "event",
-            "eventCategory": "skip",
-            "eventAction": "click",
-            "eventLabel": "直接看報導(skip)"
-        });
-        $(this).css({ "display": "none","opacity": 0,});
-        $(".fixed_pic").css({ "opacity": 0 });
-        console.log("####")
+        toSkip = true;         
+        if(toFire == true){
+            toFire = false; 
+            console.log(toFire)
+            setTimeout(function(){
+                toFire = true; 
+            }, 1222)        
+            $(".fullpage").css({
+                'height': "0",
+            })        
+            $("html, body").css({
+                 "overflow-x": "hidden",
+                 "height": "initail"
+            });        
+            $(this).css({ "display": "none"});   
+            $("html, body").animate({
+                scrollTop: $(window).height()
+            }, 1000);                    
+            ga("send", {
+                "hitType": "event",
+                "eventCategory": "skip",
+                "eventAction": "click",
+                "eventLabel": "直接看報導(skip)"
+            });
+            $(".fixed_pic").css({ "opacity": 0 });
+            $.fn.fullpage.setAutoScrolling(false);
+            $.fn.fullpage.setFitToSection(false);         
+        }
     });
+    $(".readPaper").click(function (e) {
+        toSkip = true;
+        if(toFire == true){
+            toFire = false;
+            setTimeout(function(){
+                toFire = true; 
+            }, 1222)
+            $.fn.fullpage.setAutoScrolling(false);
+            $.fn.fullpage.setFitToSection(false);  
+            $(this).css({ "display": "none","opacity": 0,});         
+            $(".fullpage").css({
+                'height': "0",
+            })        
+            $("html, body").css({
+                 "overflow-x": "hidden",
+                 "height": "initail"
+            });        
+            $("html, body").animate({
+                scrollTop: $(window).height()
+            }, 1000);                    
+            ga("send", {
+                "hitType": "event",
+                "eventCategory": "skip",
+                "eventAction": "click",
+                "eventLabel": "看完動畫看報導(next)"
+            });
+            $(".fixed_pic").css({ "opacity": 0 });
+        }
+    });    
+    console.log(toFire)
 });
