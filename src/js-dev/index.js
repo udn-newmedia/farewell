@@ -338,6 +338,9 @@ $(document).ready(function () {
             $(".downArrow").css({
                 "display": "none"
             });
+            $(".skip").css({
+                "display": "none"
+            });
         }
         if (scroll_now > $("#movie-1").offset().top - h * 0.5 && scroll_now < $("#movie-1").offset().top + h * 0.5) {
             moviePlay(1);
@@ -1682,7 +1685,6 @@ $(document).ready(function () {
                             });
                         }
                     }, 3500);
-                    localStorage.setItem("udn-readed", "readed");
                 }
             }
         },
