@@ -84,10 +84,10 @@ $(document).ready(function () {
         $(".cover_Title").css({
             'padding-top': "15%"
         });
-        $(".section").css({
-            "margin-top": "-6%"
-        });
         if (w < 768) {
+            $(".section").css({
+                "margin-top": "-6%"
+            });
             $(".fixed_pic").css({
                 "margin-top": "-98px"
             });

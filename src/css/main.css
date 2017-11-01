@@ -339,8 +339,6 @@ footer a {
   z-index: 99999;
   transition: top 0.7s ease;
   display: flex;
-  /* justify-content: space-between; */
-  justify-content: center;
   align-items: center;
 }
 

@@ -168,7 +168,6 @@ $(document).ready(function () {
     }
 
     function movieVolume(id) {
-
         if ($('#movie-' + id).get(0).muted == true) {
             $('#movie-' + id).get(0).muted = false;
             $('.volume[data-target="' + id + '"]').removeClass('fa-volume-off').addClass('fa-volume-up');
@@ -354,15 +353,39 @@ $(document).ready(function () {
     });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function(){
         movieVolume(1);
+        ga("send", {
+            "hitType": "event",
+            "eventCategory": "文章影片開聲音",
+            "eventAction": "click",
+            "eventLabel": "開了"
+        });        
     })
     $('.replay[data-target="1"]').click(function(){
         movieReplay(1);
+        ga("send", {
+            "hitType": "event",
+            "eventCategory": "文章影片再演一次",
+            "eventAction": "click",
+            "eventLabel": "重演了"
+        });               
     })
     $("#movie-1").click(function(){
         if($("#movie-1")[0].paused){
             moviePlay(1);    
+            ga("send", {
+                "hitType": "event",
+                "eventCategory": "點擊文章影片",
+                "eventAction": "click",
+                "eventLabel": "開始"
+            });                
         } else {
             moviePause(1);
+            ga("send", {
+                "hitType": "event",
+                "eventCategory": "點擊文章影片",
+                "eventAction": "click",
+                "eventLabel": "暫停"
+            });                     
         }
     })  
 
