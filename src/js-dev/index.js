@@ -23,7 +23,6 @@ $(document).ready(function () {
     var animeIndex;
     var toSkip = false;
     var toFire = true;
-    var skiped = false;
 
     var scroll_now;
     var read_progress = 10;
@@ -1431,9 +1430,6 @@ $(document).ready(function () {
                     "display": "block",
                     "color": "white"
                 });
-                if (skiped == true) {
-                    console.log("skiped");
-                }
             }
             if (index == 2) {
                 walk1.src = "src/image/animate-sprite/stage-3-walk1.png";
