@@ -87,9 +87,11 @@ $(document).ready(function () {
         $(".section").css({
             "margin-top": "-6%",
         });
-        $(".fixed_pic").css({
-            "margin-top": "-98px",
-        })          
+        if(w < 768 ){
+            $(".fixed_pic").css({
+                "margin-top": "-98px",
+            })     
+        }     
         if(ver[0] == 11){
             $(".downArrow").css({
                 "bottom": "158px",
