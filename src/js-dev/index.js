@@ -352,7 +352,7 @@ $(document).ready(function () {
             moviePause(1);
         }
     });
-    $('.volume[data-target="1"]').click(function () {
+    $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function () {
         movieVolume(1);
     });
     $('.replay[data-target="1"]').click(function () {
