@@ -84,9 +84,9 @@ $(document).ready(function () {
         $(".cover_Title").css({
             'padding-top': "15%",
         })
-        $(".section").css({
-            "margin-top": "-30px",
-        });
+        // $(".section").css({
+        //     "margin-top": "-30px",
+        // });
         $(".fixed_pic").css({
             "margin-top": "-128px",
         })          
