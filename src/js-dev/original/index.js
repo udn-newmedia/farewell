@@ -105,7 +105,11 @@ $(document).ready(function () {
         // other browser
         return false;
     }
-    console.log(detectIE())
+    if(dectectIE()){
+        $("#stage-1").css({
+            "margin-left":"-12.5%"
+        })
+    }
     function detectmob() {
         if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
             return true;
