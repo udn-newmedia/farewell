@@ -105,7 +105,7 @@ $(document).ready(function () {
         // other browser
         return false;
     }
-    if (dectectIE()) {
+    if (detectIE()) {
         $("#stage-1").css({
             "margin-left": "-12.5%"
         });

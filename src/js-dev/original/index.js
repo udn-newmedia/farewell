@@ -107,7 +107,7 @@ $(document).ready(function () {
     }
     if(detectIE()){
         $("#stage-1").css({
-            "margin-left":"-12.5%"
+            "height": "auto"
         })
     }
     function detectmob() {
