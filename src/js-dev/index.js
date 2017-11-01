@@ -107,7 +107,7 @@ $(document).ready(function () {
     }
     if (detectIE()) {
         $("#stage-1").css({
-            "margin-left": "-12.5%"
+            "height": "auto"
         });
     }
     function detectmob() {
@@ -185,6 +185,12 @@ $(document).ready(function () {
                 }
 
                 $('#progress-bar-' + id).css('width', temp + '%');
+                ga("send", {
+                    "hitType": "event",
+                    "eventCategory": "看影片幾趴",
+                    "eventAction": "click",
+                    "eventLabel": "看到幾" + temp + '%'
+                });
             }, 600);
         }
     }
