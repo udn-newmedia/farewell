@@ -355,7 +355,6 @@ $(document).ready(function () {
             });
         }
     });
-
     $(window).on('scroll', function () {
 
         scroll_now = $(window).scrollTop();
@@ -363,6 +362,9 @@ $(document).ready(function () {
         var cur_scroll = scroll_now / total_height * 100;
 
         for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
+
+            console.log(read_progress + "%");
+
             ga("send", {
                 "hitType": "event",
                 "eventCategory": "read",
@@ -380,29 +382,54 @@ $(document).ready(function () {
         }
 
         $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
-        var article = $(".content").eq(0).offset().top;
-        var articleMovie = $("#movie-1").offset().top;
-        if (scroll_now > article - 0.07 * h && scroll_now < article) {
-            $("#head").removeClass("Bgc-TP");
-            $("#indicator").addClass("mainColor");
-        }
-        if (scroll_now > article) {
-            $(".downArrow").css({
-                "display": "none"
-            });
-            $(".skip").css({
-                "display": "none"
-            });
-        }
-        if (scroll_now > articleMovie - h * 0.5 && scroll_now < articleMovie + h * 0.5) {
-            moviePlay(1);
-            console.log('movie play');
-        }
-        if (scroll_now > articleMovie + h * 0.2 || scroll_now < articleMovie - h * 0.8) {
-            moviePause(1);
-            console.log("movie pause");
-        }
     });
+    // $(window).on('scroll', function () {
+
+    // scroll_now = $(window).scrollTop();
+
+    // var cur_scroll = scroll_now / total_height * 100;
+
+    // for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
+    //     ga("send", {
+    //         "hitType": "event",
+    //         "eventCategory": "read",
+    //         "eventAction": "scroll",
+    //         "eventLabel": "[" + platform + "] [" + title + "] [page read " + read_progress + "%]"
+    //     });
+    // }
+
+    // if (scroll_now > h) {
+    //     $('#indicator').css('opacity', 1);
+    //     $('#head').css('top', headTop);
+    // } else {
+    //     $('#indicator').css('opacity', 0);
+    //     $('#head').css('top', '0');
+    // }
+
+    // $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
+    // var article = $(".content").eq(0).offset().top;
+    // var articleMovie = $("#movie-1").offset().top;
+    // if (scroll_now > article - (0.07 * h) && scroll_now < article) {
+    //     $("#head").removeClass("Bgc-TP");
+    //     $("#indicator").addClass("mainColor");
+    // }
+    // if (scroll_now > article) {
+    //     $(".downArrow").css({
+    //         "display": "none"
+    //     });
+    //     $(".skip").css({
+    //         "display": "none"
+    //     })
+    // }
+    // if(scroll_now > articleMovie - (h*0.5) && scroll_now < articleMovie + (h*0.5)){
+    //     moviePlay(1);
+    //     console.log('movie play')
+    // }
+    // if(scroll_now > articleMovie + (h * 0.2) || scroll_now <  articleMovie - (h*0.8)){
+    //     moviePause(1);
+    //     console.log("movie pause")
+    // }
+    // });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function () {
         movieVolume(1);
         ga("send", {

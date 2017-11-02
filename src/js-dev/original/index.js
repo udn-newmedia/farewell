@@ -355,14 +355,16 @@ $(document).ready(function () {
             });
         }
     });
-
-    $(window).on('scroll', function () {
+    $(window).on('scroll', function(){
 
         scroll_now = $(window).scrollTop();
 
-        var cur_scroll = scroll_now / total_height * 100;
+        var cur_scroll = scroll_now/total_height * 100;
 
-        for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
+        for(;read_progress<=Math.floor(cur_scroll);read_progress+=10){
+    
+            console.log(read_progress + "%");
+
             ga("send", {
                 "hitType": "event",
                 "eventCategory": "read",
@@ -371,17 +373,44 @@ $(document).ready(function () {
             });
         }
 
-        if (scroll_now > h) {
-            $('#indicator').css('opacity', 1);
-            $('#head').css('top', headTop);
-        } else {
-            $('#indicator').css('opacity', 0);
-            $('#head').css('top', '0');
+        if(scroll_now > h){
+            $('#indicator').css('opacity', 1)
+            $('#head').css('top', headTop)
+        }
+        else{
+            $('#indicator').css('opacity', 0)
+            $('#head').css('top', '0')
         }
 
-        $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
-        var article = $(".content").eq(0).offset().top;
-        var articleMovie = $("#movie-1").offset().top;
+        $('#indicator-bar').css('width', scroll_now/total_height * 100 + '%');
+
+    })
+    // $(window).on('scroll', function () {
+
+        // scroll_now = $(window).scrollTop();
+
+        // var cur_scroll = scroll_now / total_height * 100;
+
+        // for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
+        //     ga("send", {
+        //         "hitType": "event",
+        //         "eventCategory": "read",
+        //         "eventAction": "scroll",
+        //         "eventLabel": "[" + platform + "] [" + title + "] [page read " + read_progress + "%]"
+        //     });
+        // }
+
+        // if (scroll_now > h) {
+        //     $('#indicator').css('opacity', 1);
+        //     $('#head').css('top', headTop);
+        // } else {
+        //     $('#indicator').css('opacity', 0);
+        //     $('#head').css('top', '0');
+        // }
+
+        // $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
+        // var article = $(".content").eq(0).offset().top;
+        // var articleMovie = $("#movie-1").offset().top;
         // if (scroll_now > article - (0.07 * h) && scroll_now < article) {
         //     $("#head").removeClass("Bgc-TP");
         //     $("#indicator").addClass("mainColor");
@@ -402,7 +431,7 @@ $(document).ready(function () {
         //     moviePause(1);
         //     console.log("movie pause")
         // }
-    });
+    // });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function(){
         movieVolume(1);
         ga("send", {
