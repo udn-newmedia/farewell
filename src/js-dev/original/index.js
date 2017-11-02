@@ -23,6 +23,7 @@ $(document).ready(function () {
     var animeIndex;
     var toSkip = false;
     var toFire = true;
+    var readed = false;
 
     var scroll_now;
     var read_progress = 10;
@@ -402,11 +403,13 @@ $(document).ready(function () {
             console.log("movie pause")
         }
         if($(window).scrollTop() == 0){
-            illAnime()
-            $(".fullpage").css({
-                'display': 'block'
-            })
-            console.log("reBuild")
+            if(readed == true){
+                illAnime()
+                $(".fullpage").css({
+                    'display': 'block'
+                })
+                console.log("reBuild")
+            }
         }
     });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function(){
@@ -1471,9 +1474,7 @@ $(document).ready(function () {
                 "eventLabel": "看到第" + index + "張"
             });
             if (index == 1) {
-                $.fn.fullpage.setAutoScrolling(true);
                 $.fn.fullpage.setAllowScrolling(true);
-                $.fn.fullpage.setFitToSection(true);
                 $.fn.fullpage.setScrollingSpeed(777);                
                 $(window).scrollTop(0);   
                 $("#stage-1")[0].play();
@@ -2087,10 +2088,11 @@ $(document).ready(function () {
         }
     });
     $(".skip").click(function (e) {
-        toSkip = true;         
+        toSkip = true;
+        readed = true;      
+        resetAll();   
         if(toFire == true){
             toFire = false; 
-            resetAll();
             setTimeout(function(){
                 toFire = true; 
             }, 1222)        
@@ -2105,8 +2107,6 @@ $(document).ready(function () {
                 "eventLabel": "直接看報導(skip)"
             });
             $(".fixed_pic").css({ "opacity": 0 });
-            // $.fn.fullpage.setAutoScrolling(false);
-            // $.fn.fullpage.setFitToSection(false);  
             $.fn.fullpage.destroy('all')
             $('.fullpage').css({
                 "display": "none",
@@ -2120,12 +2120,13 @@ $(document).ready(function () {
     });
     $(".readPaper").click(function (e) {
         toSkip = true;
+        readed = true;
+        resetAll();
         if(toFire == true){
             toFire = false;
             setTimeout(function(){
                 toFire = true; 
             }, 1222)
-
             $(this).css({ "display": "none","opacity": 0,});         
             $(".fullpage").css({
                 'height': "0",
@@ -2139,9 +2140,11 @@ $(document).ready(function () {
                 "eventAction": "click",
                 "eventLabel": "看完動畫看報導(next)"
             });
-            $(".fixed_pic").css({ "opacity": 0 });
-            $.fn.fullpage.setAutoScrolling(false);
-            $.fn.fullpage.setFitToSection(false);   
+            $(".fixed_pic").css({ "opacity": 0 }); 
+            $.fn.fullpage.destroy('all')
+            $('.fullpage').css({
+                "display": "none",
+            })            
             $("html, body").css({
                  "overflow-x": "hidden",
                  "height": "initail"
