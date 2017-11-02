@@ -1450,6 +1450,7 @@ $(document).ready(function () {
         console.log("stageStateClear")     
         $(".stage-13-words h2").removeAttr('style');
         $(".stage-13-words p").removeAttr('style');
+        $(".stage-13-words").removeAttr('style');
         $(".stage-13").removeAttr('style');        
     }
 
@@ -2062,6 +2063,7 @@ $(document).ready(function () {
                 if (direction == "up") {
                     $(".stage-13-words h2").removeAttr('style');
                     $(".stage-13-words p").removeAttr('style');
+                    $(".stage-13-words").removeAttr('style');
                     $(".stage-13").removeAttr('style');
                 }
             }
@@ -2131,6 +2133,7 @@ $(document).ready(function () {
                 toFire = true; 
             }, 1222)
             $(this).css({ "display": "none","opacity": 0,});         
+            $('.skip').css({ "display": "none","opacity": 0,});
             $(".fullpage").css({
                 'height': "0",
             })                
