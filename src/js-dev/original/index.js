@@ -355,16 +355,13 @@ $(document).ready(function () {
             });
         }
     });
-    $(window).on('scroll', function(){
+    $(window).on('scroll', function () {
 
         scroll_now = $(window).scrollTop();
 
-        var cur_scroll = scroll_now/total_height * 100;
+        var cur_scroll = scroll_now / total_height * 100;
 
-        for(;read_progress<=Math.floor(cur_scroll);read_progress+=10){
-    
-            console.log(read_progress + "%");
-
+        for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
             ga("send", {
                 "hitType": "event",
                 "eventCategory": "read",
@@ -373,65 +370,45 @@ $(document).ready(function () {
             });
         }
 
-        if(scroll_now > h){
-            $('#indicator').css('opacity', 1)
-            $('#head').css('top', headTop)
+        if (scroll_now > h) {
+            $('#indicator').css('opacity', 1);
+            $('#head').css('top', headTop);
+        } else {
+            $('#indicator').css('opacity', 0);
+            $('#head').css('top', '0');
         }
-        else{
-            $('#indicator').css('opacity', 0)
-            $('#head').css('top', '0')
+
+        $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
+        var article = $(".content").eq(0).offset().top;
+        var articleMovie = $("#movie-1").offset().top;
+        if (scroll_now > article - (0.07 * h) && scroll_now < article) {
+            $("#head").removeClass("Bgc-TP");
+            $("#indicator").addClass("mainColor");
         }
-
-        $('#indicator-bar').css('width', scroll_now/total_height * 100 + '%');
-
-    })
-    // $(window).on('scroll', function () {
-
-        // scroll_now = $(window).scrollTop();
-
-        // var cur_scroll = scroll_now / total_height * 100;
-
-        // for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
-        //     ga("send", {
-        //         "hitType": "event",
-        //         "eventCategory": "read",
-        //         "eventAction": "scroll",
-        //         "eventLabel": "[" + platform + "] [" + title + "] [page read " + read_progress + "%]"
-        //     });
-        // }
-
-        // if (scroll_now > h) {
-        //     $('#indicator').css('opacity', 1);
-        //     $('#head').css('top', headTop);
-        // } else {
-        //     $('#indicator').css('opacity', 0);
-        //     $('#head').css('top', '0');
-        // }
-
-        // $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
-        // var article = $(".content").eq(0).offset().top;
-        // var articleMovie = $("#movie-1").offset().top;
-        // if (scroll_now > article - (0.07 * h) && scroll_now < article) {
-        //     $("#head").removeClass("Bgc-TP");
-        //     $("#indicator").addClass("mainColor");
-        // }
-        // if (scroll_now > article) {
-        //     $(".downArrow").css({
-        //         "display": "none"
-        //     });
-        //     $(".skip").css({
-        //         "display": "none"
-        //     })
-        // }
-        // if(scroll_now > articleMovie - (h*0.5) && scroll_now < articleMovie + (h*0.5)){
-        //     moviePlay(1);
-        //     console.log('movie play')
-        // }
-        // if(scroll_now > articleMovie + (h * 0.2) || scroll_now <  articleMovie - (h*0.8)){
-        //     moviePause(1);
-        //     console.log("movie pause")
-        // }
-    // });
+        if (scroll_now > article) {
+            $(".downArrow").css({
+                "display": "none"
+            });
+            $(".skip").css({
+                "display": "none"
+            })
+        }
+        if(scroll_now > articleMovie - (h*0.5) && scroll_now < articleMovie + (h*0.5)){
+            moviePlay(1);
+            console.log('movie play')
+        }
+        if(scroll_now > articleMovie + (h * 0.2) || scroll_now <  articleMovie - (h*0.8)){
+            moviePause(1);
+            console.log("movie pause")
+        }
+        if($(window).scrollTop() == 0){
+            illAnime()
+            $(".fullpage").css({
+                'display': 'block'
+            })
+            console.log("reBuild")
+        }
+    });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function(){
         movieVolume(1);
         ga("send", {
@@ -1470,7 +1447,7 @@ $(document).ready(function () {
         console.log("stageStateClear")     
     }
 
-
+    function illAnime () {
     $('.fullpage').fullpage({
         // navigation: true,
         recordHistory: false,
@@ -2091,7 +2068,9 @@ $(document).ready(function () {
                 $(".fixed_pic").css("opacity", "0");
             }
         }
-    });
+    });        
+    }
+    illAnime()
     $(".downArrow").click(function (e) {
         e.preventDefault();
         $.fn.fullpage.moveSectionDown();
@@ -2111,13 +2090,10 @@ $(document).ready(function () {
         toSkip = true;         
         if(toFire == true){
             toFire = false; 
-            console.log(toFire)
+            resetAll();
             setTimeout(function(){
                 toFire = true; 
             }, 1222)        
-            $(".fullpage").css({
-                'height': "0",
-            })        
             $(this).css({ "display": "none"});   
             $("html, body").animate({
                 scrollTop: $(window).height()
@@ -2129,13 +2105,17 @@ $(document).ready(function () {
                 "eventLabel": "直接看報導(skip)"
             });
             $(".fixed_pic").css({ "opacity": 0 });
-            $.fn.fullpage.setAutoScrolling(false);
-            $.fn.fullpage.setFitToSection(false);  
+            // $.fn.fullpage.setAutoScrolling(false);
+            // $.fn.fullpage.setFitToSection(false);  
+            $.fn.fullpage.destroy('all')
+            $('.fullpage').css({
+                "display": "none",
+            })
             $("html, body").css({
                  "overflow-x": "hidden",
                  "height": "initail"
             });
-            stageStateReset()                     
+            stageStateReset()     
         }
     });
     $(".readPaper").click(function (e) {

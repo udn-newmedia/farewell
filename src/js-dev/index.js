@@ -362,9 +362,6 @@ $(document).ready(function () {
         var cur_scroll = scroll_now / total_height * 100;
 
         for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
-
-            console.log(read_progress + "%");
-
             ga("send", {
                 "hitType": "event",
                 "eventCategory": "read",
@@ -382,54 +379,29 @@ $(document).ready(function () {
         }
 
         $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
+        var article = $(".content").eq(0).offset().top;
+        var articleMovie = $("#movie-1").offset().top;
+        if (scroll_now > article - 0.07 * h && scroll_now < article) {
+            $("#head").removeClass("Bgc-TP");
+            $("#indicator").addClass("mainColor");
+        }
+        if (scroll_now > article) {
+            $(".downArrow").css({
+                "display": "none"
+            });
+            $(".skip").css({
+                "display": "none"
+            });
+        }
+        if (scroll_now > articleMovie - h * 0.5 && scroll_now < articleMovie + h * 0.5) {
+            moviePlay(1);
+            console.log('movie play');
+        }
+        if (scroll_now > articleMovie + h * 0.2 || scroll_now < articleMovie - h * 0.8) {
+            moviePause(1);
+            console.log("movie pause");
+        }
     });
-    // $(window).on('scroll', function () {
-
-    // scroll_now = $(window).scrollTop();
-
-    // var cur_scroll = scroll_now / total_height * 100;
-
-    // for (; read_progress <= Math.floor(cur_scroll); read_progress += 10) {
-    //     ga("send", {
-    //         "hitType": "event",
-    //         "eventCategory": "read",
-    //         "eventAction": "scroll",
-    //         "eventLabel": "[" + platform + "] [" + title + "] [page read " + read_progress + "%]"
-    //     });
-    // }
-
-    // if (scroll_now > h) {
-    //     $('#indicator').css('opacity', 1);
-    //     $('#head').css('top', headTop);
-    // } else {
-    //     $('#indicator').css('opacity', 0);
-    //     $('#head').css('top', '0');
-    // }
-
-    // $('#indicator-bar').css('width', scroll_now / total_height * 100 + '%');
-    // var article = $(".content").eq(0).offset().top;
-    // var articleMovie = $("#movie-1").offset().top;
-    // if (scroll_now > article - (0.07 * h) && scroll_now < article) {
-    //     $("#head").removeClass("Bgc-TP");
-    //     $("#indicator").addClass("mainColor");
-    // }
-    // if (scroll_now > article) {
-    //     $(".downArrow").css({
-    //         "display": "none"
-    //     });
-    //     $(".skip").css({
-    //         "display": "none"
-    //     })
-    // }
-    // if(scroll_now > articleMovie - (h*0.5) && scroll_now < articleMovie + (h*0.5)){
-    //     moviePlay(1);
-    //     console.log('movie play')
-    // }
-    // if(scroll_now > articleMovie + (h * 0.2) || scroll_now <  articleMovie - (h*0.8)){
-    //     moviePause(1);
-    //     console.log("movie pause")
-    // }
-    // });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function () {
         movieVolume(1);
         ga("send", {
@@ -1468,627 +1440,627 @@ $(document).ready(function () {
         console.log("stageStateClear");
     }
 
-    $('.fullpage').fullpage({
-        // navigation: true,
-        recordHistory: false,
-        scrollingSpeed: 777,
-        lazyLoading: true,
-        afterLoad: function (anchorLink, index) {
-            animeIndex = index;
-            $.fn.fullpage.setAllowScrolling(false);
-            $("#section-" + index).css({
-                "opacity": "1",
-                "z-index": 50
-            });
-            $("#head").addClass('Bgc-TP');
-            bar_witdh = index / ($(".fullpage").children().length - 1) * 100;
-            $('#indicator-bar').css('width', bar_witdh + '%');
-            $("#indicator").removeClass("mainColor");
-            ga("send", {
-                "hitType": "event",
-                "eventCategory": "插畫(15張)",
-                "eventAction": "scroll",
-                "eventLabel": "看到第" + index + "張"
-            });
-            if (index == 1) {
-                $.fn.fullpage.setAutoScrolling(true);
-                $.fn.fullpage.setAllowScrolling(true);
-                $.fn.fullpage.setFitToSection(true);
-                $.fn.fullpage.setScrollingSpeed(777);
-                $(window).scrollTop(0);
-                $("#stage-1")[0].play();
-                $(".fixed_pic").css("opacity", "1");
-                $(".fullpage").css({
-                    "height": "100%"
-                });
-                start.src = "src/image/animate-sprite/stage-2-start.jpg";
-                end.src = "src/image/animate-sprite/stage-2-end.jpg";
-                toSkip = false;
-                $(".downArrow").css({
-                    "display": "block",
-                    "color": "white"
-                });
-            }
-            if (index == 2) {
-                walk1.src = "src/image/animate-sprite/stage-3-walk1.png";
-                walkBack.src = "src/image/animate-sprite/stage-3-walkback.png";
-                tree.src = 'src/image/animate-sprite/stage-3-bg.png';
-                padTree.src = "src/image/animate-sprite/stage-3pod.png";
+    // $('.fullpage').fullpage({
+    //     // navigation: true,
+    //     recordHistory: false,
+    //     scrollingSpeed: 777,
+    //     lazyLoading: true,
+    //     afterLoad: function (anchorLink, index) {
+    //         animeIndex = index;
+    //         $.fn.fullpage.setAllowScrolling(false);
+    //         $("#section-" + index).css({
+    //             "opacity": "1",
+    //             "z-index": 50
+    //         });
+    //         $("#head").addClass('Bgc-TP');
+    //         bar_witdh = index / ($(".fullpage").children().length - 1) * 100;
+    //         $('#indicator-bar').css('width', bar_witdh + '%');
+    //         $("#indicator").removeClass("mainColor");
+    //         ga("send", {
+    //             "hitType": "event",
+    //             "eventCategory": "插畫(15張)",
+    //             "eventAction": "scroll",
+    //             "eventLabel": "看到第" + index + "張"
+    //         });
+    //         if (index == 1) {
+    //             $.fn.fullpage.setAutoScrolling(true);
+    //             $.fn.fullpage.setAllowScrolling(true);
+    //             $.fn.fullpage.setFitToSection(true);
+    //             $.fn.fullpage.setScrollingSpeed(777);                
+    //             $(window).scrollTop(0);   
+    //             $("#stage-1")[0].play();
+    //             $(".fixed_pic").css("opacity", "1");
+    //             $(".fullpage").css({
+    //                 "height": "100%"
+    //             })
+    //             start.src = "src/image/animate-sprite/stage-2-start.jpg";
+    //             end.src = "src/image/animate-sprite/stage-2-end.jpg";       
+    //             toSkip = false;     
+    //             $(".downArrow").css({
+    //                 "display": "block",
+    //                 "color": "white"
+    //             });
+    //         }
+    //         if (index == 2) {
+    //             walk1.src = "src/image/animate-sprite/stage-3-walk1.png";
+    //             walkBack.src = "src/image/animate-sprite/stage-3-walkback.png";
+    //             tree.src = 'src/image/animate-sprite/stage-3-bg.png';
+    //             padTree.src = "src/image/animate-sprite/stage-3pod.png";    
 
-                $(".page-black").eq(0).css({
-                    "transform": "translate(0, 0)"
-                });
-                $(".downArrow").css({
-                    "display": "block",
-                    "color": "white"
-                });
-                if ($('.voice-state img').attr('src') == 'src/image/off.png') {
-                    $(".voice-state img").addClass("blink");
-                }
-                $.fn.fullpage.setAllowScrolling(true);
-            }
-            if (index == 3) {
-                kitchen.src = "src/image/animate-sprite/stage-4-kitchen.jpg";
-                foodInfo.src = "src/image/animate-sprite/stage-6-foodInfo.png";
-                foodSafe.src = "src/image/animate-sprite/stage-6-foodSafe.png";
-                speech.src = "src/image/animate-sprite/stage-6-speech.png";
-                labTool.src = "src/image/animate-sprite/stage-6-lab-bg.png";
-                labLocker.src = "src/image/animate-sprite/stage-6-lab-bg2.png";
-                $(".voice-state img").removeClass("blink");
-                $(".page-black").eq(0).removeAttr('style');
+    //             $(".page-black").eq(0).css({
+    //                 "transform": "translate(0, 0)"
+    //             });
+    //             $(".downArrow").css({
+    //                 "display": "block",
+    //                 "color": "white"
+    //             });
+    //             if($('.voice-state img').attr('src') == 'src/image/off.png'){
+    //                 $(".voice-state img").addClass("blink");    
+    //             }
+    //             $.fn.fullpage.setAllowScrolling(true);
+    //         }
+    //         if (index == 3) {
+    //             kitchen.src = "src/image/animate-sprite/stage-4-kitchen.jpg";
+    //             foodInfo.src = "src/image/animate-sprite/stage-6-foodInfo.png";
+    //             foodSafe.src = "src/image/animate-sprite/stage-6-foodSafe.png";
+    //             speech.src = "src/image/animate-sprite/stage-6-speech.png";
+    //             labTool.src = "src/image/animate-sprite/stage-6-lab-bg.png";
+    //             labLocker.src = "src/image/animate-sprite/stage-6-lab-bg2.png";
+    //             $(".voice-state img").removeClass("blink");
+    //             $(".page-black").eq(0).removeAttr('style');
 
-                $(".page-black").eq(1).css({
-                    "transform": "translate(0, 0)"
-                });
-                $(".downArrow").css({
-                    "display": "block",
-                    "color": "white"
-                });
-                $.fn.fullpage.setAllowScrolling(true);
-            }
-            if (index == 4) {
-                car.src = "src/image/animate-sprite/stage-5-car.jpg";
-                doctor.src = "src/image/animate-sprite/stage-6-doctor.png";
-                cpu.src = "src/image/animate-sprite/stage-6-cpu.png";
-                table.src = "src/image/animate-sprite/stage-9-bg.png";
-                present.src = "src/image/animate-sprite/stage-11-bg.png";
-                $(".page-black").eq(1).removeAttr('style');
-                $(".skip").css({
-                    "display": "block"
-                });
-                $("#stage-2").css({
-                    "transform": "translateX(0)",
-                    "opacity": "1"
-                });
-                SIDdrawStart = setInterval(drawStart, 100);
-            }
-            if (index == 5) {
-                if (w >= 1024) {
-                    room.src = "src/image/animate-sprite/stage-7-roomW.jpg";
-                } else {
-                    room.src = "src/image/animate-sprite/stage-7-room.jpg";
-                }
-                ctx_2.clearRect(0, 0, stage_2.width, stage_2.height);
-                startCurFrame = 0;
-                endCurFrame = 0;
-                $("#stage-2").removeAttr('style');
-                $(".stage-2-words").removeAttr('style');
+    //             $(".page-black").eq(1).css({
+    //                 "transform": "translate(0, 0)"
+    //             });
+    //             $(".downArrow").css({
+    //                 "display": "block",
+    //                 "color": "white"
+    //             });
+    //             $.fn.fullpage.setAllowScrolling(true);
+    //         }
+    //         if (index == 4) {
+    //             car.src = "src/image/animate-sprite/stage-5-car.jpg";
+    //             doctor.src = "src/image/animate-sprite/stage-6-doctor.png";
+    //             cpu.src = "src/image/animate-sprite/stage-6-cpu.png";
+    //             table.src = "src/image/animate-sprite/stage-9-bg.png";
+    //             present.src = "src/image/animate-sprite/stage-11-bg.png";
+    //             $(".page-black").eq(1).removeAttr('style');
+    //             $(".skip").css({
+    //                 "display": "block",
+    //             })
+    //             $("#stage-2").css({
+    //                 "transform": "translateX(0)",
+    //                 "opacity": "1"
+    //             });
+    //             SIDdrawStart = setInterval(drawStart, 100);
+    //         }
+    //         if (index == 5) {
+    //             if (w >= 1024) {
+    //                 room.src = "src/image/animate-sprite/stage-7-roomW.jpg";
+    //             } else {
+    //                 room.src = "src/image/animate-sprite/stage-7-room.jpg";
+    //             }
+    //             ctx_2.clearRect(0, 0, stage_2.width, stage_2.height);
+    //             startCurFrame = 0;
+    //             endCurFrame = 0;
+    //             $("#stage-2").removeAttr('style');
+    //             $(".stage-2-words").removeAttr('style');
 
-                $(".stage-3-words").css({
-                    "transform": "translate(0, 15%)",
-                    "opacity": "1"
-                });
-                $("#music-walk")[0].play();
-                if (w >= 1024) {
-                    ctx_3_1.drawImage(tree, 0, 0, treeWidth, treeHeight, 35, 126, treeWidth, treeHeight);
-                }
-                if (w >= 768 && w < 1023) {
-                    ctx_3_1.drawImage(padTree, 0, 0, 578, 820, 0, 0, 578, 820);
-                }
-                if (w < 768) {
-                    ctx_3_1.drawImage(tree, treeSrcX, treeSrcY, treeWidth, treeHeight, treeX, treeY, treeWidth, treeHeight);
-                }
-                SIDdrawWalk1 = setInterval(drawWalk1To, 83);
-                $.fn.fullpage.setScrollingSpeed(1777);
-            }
-            if (index == 6) {
-                bed.src = "src/image/animate-sprite/stage-8-bed.jpg";
-                // reset Stage-3
-                ctx_3.clearRect(0, 0, stage_3.width + 100, stage_3.height + 100);
-                ctx_3.globalAlpha = 1;
-                if (w >= 1024) {
-                    walk1X = 880;
-                    walk1Y = 425;
-                } else if (w >= 768 && w < 1024) {
-                    walk1X = 550;
-                    walk1Y = 660;
-                } else {
-                    walk1X = 390;
-                    walk1Y = 575;
-                }
-                if (w >= 1024) {
-                    walkBackX = 560;
-                    walkBackY = 417;
-                } else if (w >= 768 && w < 1024) {
-                    walkBackX = 350;
-                    walkBackY = 670;
-                } else {
-                    walkBackX = 180;
-                    walkBackY = 565;
-                }
-                $(".stage-3-words").removeAttr("style");
+    //             $(".stage-3-words").css({
+    //                 "transform": "translate(0, 15%)",
+    //                 "opacity": "1"
+    //             });
+    //             $("#music-walk")[0].play();
+    //             if (w >= 1024) {
+    //                 ctx_3_1.drawImage(tree, 0, 0, treeWidth, treeHeight, 35, 126, treeWidth, treeHeight);
+    //             }
+    //             if (w >= 768 && w < 1023) {
+    //                 ctx_3_1.drawImage(padTree, 0, 0, 578, 820, 0, 0, 578, 820);
+    //             }
+    //             if (w < 768){
+    //                ctx_3_1.drawImage(tree, treeSrcX, treeSrcY, treeWidth, treeHeight, treeX, treeY, treeWidth, treeHeight);
+    //             }
+    //             SIDdrawWalk1 = setInterval(drawWalk1To, 83);
+    //             $.fn.fullpage.setScrollingSpeed(1777);
+    //         }
+    //         if (index == 6) {
+    //             bed.src = "src/image/animate-sprite/stage-8-bed.jpg";
+    //             // reset Stage-3
+    //             ctx_3.clearRect(0, 0, stage_3.width+100, stage_3.height+100);
+    //             ctx_3.globalAlpha = 1;
+    //             if (w >= 1024) {
+    //                 walk1X = 880;
+    //                 walk1Y = 425;
+    //             } else if (w >= 768 && w < 1024) {
+    //                 walk1X = 550;
+    //                 walk1Y = 660;
+    //             } else {
+    //                 walk1X = 390;
+    //                 walk1Y = 575;
+    //             }
+    //             if (w >= 1024) {
+    //                 walkBackX = 560;
+    //                 walkBackY = 417;
+    //             } else if (w >= 768 && w < 1024) {
+    //                 walkBackX = 350;
+    //                 walkBackY = 670;        
+    //             } else {
+    //                 walkBackX = 180;
+    //                 walkBackY = 565;
+    //             }
+    //             $(".stage-3-words").removeAttr("style");
 
-                // do stage-4
-                $(".stage-4-words p").css({
-                    "transform": "translate(0, 0)",
-                    "opacity": "1"
-                });
-                $("#stage-4").css({
-                    "transform": "translate(0, 0)",
-                    "opacity": "1"
-                });
-                $("#music-cooking")[0].play();
-                SIDdrawKitchen = setInterval(drawKitchen, 125);
-            }
-            if (index == 7) {
-                smoke.src = "src/image/animate-sprite/stage-9-smoke.png";
-                stroll.src = "src/image/animate-sprite/stage-10-stroll.png";
-                wave.src = "src/image/animate-sprite/stage-10-wave.png";
-                // reset Stage-4
-                ctx_4.clearRect(0, 0, stage_4.width, stage_4.height);
-                kitchenArrow = 0;
-                $(".stage-4-words p").removeAttr('style');
-                $("#stage-4").removeAttr('style');
+    //             // do stage-4
+    //             $(".stage-4-words p").css({
+    //                 "transform": "translate(0, 0)",
+    //                 "opacity": "1"
+    //             });
+    //             $("#stage-4").css({
+    //                 "transform": "translate(0, 0)",
+    //                 "opacity": "1"
+    //             });
+    //             $("#music-cooking")[0].play();
+    //             SIDdrawKitchen = setInterval(drawKitchen, 125);
+    //         }
+    //         if (index == 7) {
+    //             smoke.src = "src/image/animate-sprite/stage-9-smoke.png";
+    //             stroll.src = "src/image/animate-sprite/stage-10-stroll.png";
+    //             wave.src = "src/image/animate-sprite/stage-10-wave.png";
+    //             // reset Stage-4
+    //             ctx_4.clearRect(0, 0, stage_4.width, stage_4.height);
+    //             kitchenArrow = 0;
+    //             $(".stage-4-words p").removeAttr('style');
+    //             $("#stage-4").removeAttr('style');
 
-                // do stage-5
-                $("#stage-5").css({
-                    "transform": "translate(0, 0)",
-                    "opacity": "1"
-                });
-                $(".stage-5-words p").css({
-                    "opacity": "1"
-                });
-                $("#music-driving")[0].play();
-                SIDdrawCar = setInterval(drawCar, 125);
-            }
-            if (index == 8) {
-                man.src = "src/image/animate-sprite/stage-11-man.jpg";
-                woman.src = "src/image/animate-sprite/stage-11-woman.jpg";
-                wash.src = "src/image/animate-sprite/stage-12-wash.jpg";
-                //reset Stage-5
-                carArrow = 0;
-                ctx_5.clearRect(0, 0, stage_5.width, stage_5.height);
-                clearInterval(SIDdrawCar);
-                $("#stage-5").removeAttr('style');
-                $(".stage-5-words p").removeAttr('style');
-                $(".stage-5-words h2").removeAttr('style');
+    //             // do stage-5
+    //             $("#stage-5").css({
+    //                 "transform": "translate(0, 0)",
+    //                 "opacity": "1"
+    //             });
+    //             $(".stage-5-words p").css({
+    //                 "opacity": "1"
+    //             });
+    //             $("#music-driving")[0].play();
+    //             SIDdrawCar = setInterval(drawCar, 125);
+    //         }
+    //         if (index == 8) {
+    //             man.src = "src/image/animate-sprite/stage-11-man.jpg";
+    //             woman.src = "src/image/animate-sprite/stage-11-woman.jpg";
+    //             wash.src = "src/image/animate-sprite/stage-12-wash.jpg";
+    //             //reset Stage-5
+    //             carArrow = 0;
+    //             ctx_5.clearRect(0, 0, stage_5.width, stage_5.height);
+    //             clearInterval(SIDdrawCar);
+    //             $("#stage-5").removeAttr('style');
+    //             $(".stage-5-words p").removeAttr('style');
+    //             $(".stage-5-words h2").removeAttr('style');
 
-                ctx_6.drawImage(foodInfo, foodInfoSrcX, foodInfoSrcY, foodInfoWidth, foodInfoHeight, foodInfoX, foodInfoY, foodInfoWidth, foodInfoHeight);
-                ctx_6_1.drawImage(foodSafe, foodSafeSrcX, foodSafeSrcY, foodSafeWidth, foodSafeHeight, foodSafeX, foodSafeY, foodSafeWidth, foodSafeHeight);
-                ctx_6_2.drawImage(speech, speechSrcX, speechSrcY, speechWidth, speechHeight, speechX, speechY, speechWidth, speechHeight);
-                ctx_6_3_bg.drawImage(labTool, 0, 0, 360, 395, 75, 150, 360, 395);
-                ctx_6_4.drawImage(labLocker, 0, 0, 124, 208, 0, 459, 124, 208);
+    //             ctx_6.drawImage(foodInfo, foodInfoSrcX, foodInfoSrcY, foodInfoWidth, foodInfoHeight, foodInfoX, foodInfoY, foodInfoWidth, foodInfoHeight);
+    //             ctx_6_1.drawImage(foodSafe, foodSafeSrcX, foodSafeSrcY, foodSafeWidth, foodSafeHeight, foodSafeX, foodSafeY, foodSafeWidth, foodSafeHeight);
+    //             ctx_6_2.drawImage(speech, speechSrcX, speechSrcY, speechWidth, speechHeight, speechX, speechY, speechWidth, speechHeight);
+    //             ctx_6_3_bg.drawImage(labTool, 0, 0, 360, 395, 75, 150, 360, 395);
+    //             ctx_6_4.drawImage(labLocker, 0, 0, 124, 208, 0, 459, 124, 208);
 
-                $("#stage-6").css({
-                    "opacity": "1",
-                    "transform": "translate(0, 0)"
-                });
-                setTimeout(function () {
-                    $("#stage-6_1").css({
-                        "opacity": "1",
-                        "transform": "translate(0, 0)"
-                    });
-                }, 222);
-                setTimeout(function () {
-                    $("#stage-6_2").css({
-                        "opacity": "1",
-                        "transform": "translate(0, 0)"
-                    });
-                }, 555);
-                setTimeout(function () {
-                    $("#music-camera")[0].play();
-                    SIDdrawFoodInfo = setInterval(drawFoodInfo, 83);
-                    SIDdrawFoodSafe = setInterval(drawFoodSafe, 83);
-                    SIDdrawSpeech = setInterval(drawSpeech, 83);
-                }, 1433);
-                setTimeout(function () {
-                    $(".stage-6-words p").eq(0).css({
-                        "opacity": "1",
-                        "transform": 'translate(0, 0)'
-                    });
-                }, 1666);
-            }
-            if (index == 9) {
-                // reset stage-6
-                ctx_6.clearRect(0, 0, stage_6.width, stage_6.height);
-                ctx_6_1.clearRect(0, 0, stage_6_1.width, stage_6_1.height);
-                ctx_6_2.clearRect(0, 0, stage_6_2.width, stage_6_2.height);
-                ctx_6_3.clearRect(0, 0, stage_6_3.width, stage_6_3.height);
-                ctx_6_4.clearRect(0, 0, stage_6_4.width, stage_6_4.height);
-                $("#stage-6").removeAttr('style');
-                $("#stage-6_1").removeAttr('style');
-                $("#stage-6_2").removeAttr('style');
-                $("#stage-6_3").removeAttr('style');
-                $("#stage-6_3_bg").removeAttr('style');
-                $("#stage-6_4").removeAttr('style');
-                $(".stage-6-words p").eq(0).removeAttr('style');
-                $(".stage-6-words p").eq(1).removeAttr('style');
-                foodInfoEnd = 0;
-                foodSafeEnd = 0;
-                speechEnd = 0;
+    //             $("#stage-6").css({
+    //                 "opacity": "1",
+    //                 "transform": "translate(0, 0)"
+    //             });
+    //             setTimeout(function () {
+    //                 $("#stage-6_1").css({
+    //                     "opacity": "1",
+    //                     "transform": "translate(0, 0)"
+    //                 });
+    //             }, 222);
+    //             setTimeout(function () {
+    //                 $("#stage-6_2").css({
+    //                     "opacity": "1",
+    //                     "transform": "translate(0, 0)"
+    //                 });
+    //             }, 555);
+    //             setTimeout(function () {
+    //                 $("#music-camera")[0].play();
+    //                 SIDdrawFoodInfo = setInterval(drawFoodInfo, 83);
+    //                 SIDdrawFoodSafe = setInterval(drawFoodSafe, 83);
+    //                 SIDdrawSpeech = setInterval(drawSpeech, 83);
+    //             }, 1433);
+    //             setTimeout(function () {
+    //                 $(".stage-6-words p").eq(0).css({
+    //                     "opacity": "1",
+    //                     "transform": 'translate(0, 0)'
+    //                 });
+    //             }, 1666);
+    //         }
+    //         if (index == 9) {
+    //             // reset stage-6
+    //             ctx_6.clearRect(0, 0, stage_6.width, stage_6.height);
+    //             ctx_6_1.clearRect(0, 0, stage_6_1.width, stage_6_1.height);
+    //             ctx_6_2.clearRect(0, 0, stage_6_2.width, stage_6_2.height);
+    //             ctx_6_3.clearRect(0, 0, stage_6_3.width, stage_6_3.height);
+    //             ctx_6_4.clearRect(0, 0, stage_6_4.width, stage_6_4.height);
+    //             $("#stage-6").removeAttr('style');
+    //             $("#stage-6_1").removeAttr('style');
+    //             $("#stage-6_2").removeAttr('style');
+    //             $("#stage-6_3").removeAttr('style');
+    //             $("#stage-6_3_bg").removeAttr('style');
+    //             $("#stage-6_4").removeAttr('style');
+    //             $(".stage-6-words p").eq(0).removeAttr('style');
+    //             $(".stage-6-words p").eq(1).removeAttr('style');
+    //             foodInfoEnd = 0;
+    //             foodSafeEnd = 0;
+    //             speechEnd = 0;
 
-                SIDdrawRoom = setInterval(drawRoom, 125);
-                $("#stage-7").css({
-                    "opacity": "1"
-                });
-            }
-            if (index == 10) {
-                // reset stage-7
-                ctx_7.clearRect(0, 0, stage_7.width, stage_7.height);
-                $("#stage-7").removeAttr('style');
-                $(".stage-7-words").removeAttr('style');
+    //             SIDdrawRoom = setInterval(drawRoom, 125);
+    //             $("#stage-7").css({
+    //                 "opacity": "1"
+    //             });
+    //         }
+    //         if (index == 10) {
+    //             // reset stage-7
+    //             ctx_7.clearRect(0, 0, stage_7.width, stage_7.height);
+    //             $("#stage-7").removeAttr('style');
+    //             $(".stage-7-words").removeAttr('style');
 
-                $(".stage-8-words p").eq(0).css({
-                    "opacity": "1",
-                    "transform": "translate(0, 0)"
-                });
-                setTimeout(function () {
-                    $("#stage-8").css({
-                        "opacity": "1",
-                        "transform": "translate(0, 0)"
-                    });
-                    SIDdrawBed = setInterval(drawBed, 125);
-                }, 777);
-            }
-            if (index == 11) {
-                // reset stage-8
-                bedCurFrame = 0;
-                $(".stage-8-words p").removeAttr('style');
-                $(".stage-8-words h2").removeAttr('style');
-                $("#stage-8").removeAttr('style');
-                ctx_8.clearRect(0, 0, stage_8.width, stage_8.height);
+    //             $(".stage-8-words p").eq(0).css({
+    //                 "opacity": "1",
+    //                 "transform": "translate(0, 0)"
+    //             });
+    //             setTimeout(function () {
+    //                 $("#stage-8").css({
+    //                     "opacity": "1",
+    //                     "transform": "translate(0, 0)"
+    //                 });
+    //                 SIDdrawBed = setInterval(drawBed, 125);
+    //             }, 777);
+    //         }
+    //         if (index == 11) {
+    //             // reset stage-8
+    //             bedCurFrame = 0;
+    //             $(".stage-8-words p").removeAttr('style');
+    //             $(".stage-8-words h2").removeAttr('style');
+    //             $("#stage-8").removeAttr('style');
+    //             ctx_8.clearRect(0, 0, stage_8.width, stage_8.height);
 
-                $(".stage-9-words p").css({
-                    "opacity": "1",
-                    "transform": "translate(0, 0)"
-                });
-                ctx_9_bg.drawImage(table, 0, 0, 413, 416, 12, 250, 413, 416);
-                SIDdrawSmoke = setInterval(drawSmoke, 125);
-                setTimeout(function () {
-                    $("#stage-9, #stage-9_bg").css({
-                        "opacity": "1",
-                        "transform": "translate(0, 0)"
-                    });
-                }, 1222);
-            }
-            if (index == 12) {
-                // reset stage-9
-                smokeArrow = 0;
-                ctx_9.clearRect(0, 0, stage_9.width, stage_9.height);
-                ctx_9_bg.clearRect(0, 0, stage_9_bg.width + 100, stage_9_bg.height + 100);
-                $(".stage-9-words p").removeAttr('style');
-                $("#stage-9").removeAttr('style');
-                $("#stage-9_bg").removeAttr('style');
+    //             $(".stage-9-words p").css({
+    //                 "opacity": "1",
+    //                 "transform": "translate(0, 0)"
+    //             });
+    //             ctx_9_bg.drawImage(table, 0, 0, 413, 416, 12, 250, 413, 416);
+    //             SIDdrawSmoke = setInterval(drawSmoke, 125);
+    //             setTimeout(function () {
+    //                 $("#stage-9, #stage-9_bg").css({
+    //                     "opacity": "1",
+    //                     "transform": "translate(0, 0)"
+    //                 });
+    //             }, 1222);
+    //         }
+    //         if (index == 12) {
+    //             // reset stage-9
+    //             smokeArrow = 0;
+    //             ctx_9.clearRect(0, 0, stage_9.width, stage_9.height);
+    //             ctx_9_bg.clearRect(0, 0, stage_9_bg.width + 100, stage_9_bg.height + 100);
+    //             $(".stage-9-words p").removeAttr('style');
+    //             $("#stage-9").removeAttr('style');
+    //             $("#stage-9_bg").removeAttr('style');
 
-                $("#music-street")[0].play();
-                SIDdrawStroll = setInterval(drawStroll, 125);
-            }
-            if (index == 13) {
-                // reset stage-10
-                toWave = 0;
-                thanksIndex = 0;
-                waveCurFrame = 0;
-                ctx_10.clearRect(0, 0, stage_10.width, stage_10.height);
-                $(".thanks").removeAttr('style');
-                $(".stage-10-words").removeAttr('style');
-                $(".stage-10-words p").removeAttr('style');
+    //             $("#music-street")[0].play();
+    //             SIDdrawStroll = setInterval(drawStroll, 125);
+    //         }
+    //         if (index == 13) {
+    //             // reset stage-10
+    //             toWave = 0;
+    //             thanksIndex = 0;
+    //             waveCurFrame = 0;
+    //             ctx_10.clearRect(0, 0, stage_10.width, stage_10.height);
+    //             $(".thanks").removeAttr('style');
+    //             $(".stage-10-words").removeAttr('style');
+    //             $(".stage-10-words p").removeAttr('style');
 
-                $(".stage-11-words p").css({
-                    "opacity": '1'
-                });
+    //             $(".stage-11-words p").css({
+    //                 "opacity": '1'
+    //             });
 
-                ctx_11_2.drawImage(present, 0, 0, 302, 322, 36, 180, 302, 322);
-                SIDdrawMan = setInterval(drawMan, 125);
-                setTimeout(function () {
-                    $("#stage-11").css({
-                        "opacity": "0"
-                    });
-                    clearInterval(SIDdrawMan);
-                    SIDdrawWoman = setInterval(drawWoman, 125);
-                }, 2000);
-                setTimeout(function () {
-                    $("#stage-11_1").css({
-                        "opacity": "0"
-                    });
-                    clearInterval(SIDdrawWoman);
-                }, 4500);
-                setTimeout(function () {
-                    $(".downArrow").css({
-                        "display": "block",
-                        "color": "black"
-                    });
-                    $.fn.fullpage.setAllowScrolling(true);
-                }, 4666);
-            }
-            if (index == 14) {
-                // reset stage-11
-                ctx_11.clearRect(0, 0, stage_11.width, stage_11.height);
-                ctx_11_1.clearRect(0, 0, stage_11_1.width, stage_11_1.height);
-                $("#stage-11").removeAttr('style');
-                $("#stage-11_1").removeAttr('style');
-                $(".stage-11-words p").removeAttr('style');
+    //             ctx_11_2.drawImage(present, 0, 0, 302, 322, 36, 180, 302, 322);
+    //             SIDdrawMan = setInterval(drawMan, 125);
+    //             setTimeout(function () {
+    //                 $("#stage-11").css({
+    //                     "opacity": "0"
+    //                 });
+    //                 clearInterval(SIDdrawMan);
+    //                 SIDdrawWoman = setInterval(drawWoman, 125);
+    //             }, 2000);
+    //             setTimeout(function () {
+    //                 $("#stage-11_1").css({
+    //                     "opacity": "0"
+    //                 });
+    //                 clearInterval(SIDdrawWoman);
+    //             }, 4500);
+    //             setTimeout(function () {
+    //                 $(".downArrow").css({
+    //                     "display": "block",
+    //                     "color": "black"
+    //                 });
+    //                 $.fn.fullpage.setAllowScrolling(true);
+    //             }, 4666);
+    //         }
+    //         if (index == 14) {
+    //             // reset stage-11
+    //             ctx_11.clearRect(0, 0, stage_11.width, stage_11.height);
+    //             ctx_11_1.clearRect(0, 0, stage_11_1.width, stage_11_1.height);
+    //             $("#stage-11").removeAttr('style');
+    //             $("#stage-11_1").removeAttr('style');
+    //             $(".stage-11-words p").removeAttr('style');
 
-                $(".stage-12-words p").eq(0).css({
-                    "opacity": 1
-                });
-                setTimeout(function () {
-                    $(".stage-12-words p").eq(1).css({
-                        "opacity": 1
-                    });
-                    $("#stage-12").css({
-                        "opacity": 1
-                    });
-                    SIDdrawWash = setInterval(drawWash, 125);
-                }, 1000);
-                setTimeout(function () {
-                    $(".stage-12-words p").eq(2).css({
-                        "opacity": 1
-                    });
-                }, 2000);
-            }
-            if (index == 15) {
-                //reset stage-12
-                ctx_12.clearRect(0, 0, stage_12.width, stage_12.height);
-                washCurFrame = 0;
-                $(".stage-12-words p").removeAttr('style');
-                $("#stage-12").removeAttr('style');
-                if (toSkip == false) {
-                    $(".stage-13").eq(0).css({
-                        "opacity": "1"
-                    });
-                    $(".stage-13-words").css({
-                        "transform": "translate(0, -20%)",
-                        "opacity": 1
-                    });
-                    setTimeout(function () {
-                        $(".stage-13").eq(1).css({
-                            "opacity": "1"
-                        });
-                        $(".stage-13-words h2").css({
-                            "opacity": "1"
-                        });
-                    }, 1666);
-                    setTimeout(function () {
-                        $(".stage-13").eq(2).css({
-                            "opacity": "1"
-                        });
-                        if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
-                            $(".readPaper").css({
-                                "display": "block"
-                            });
-                        }
-                    }, 3333);
-                    setTimeout(function () {
-                        if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
-                            $(".readPaper").css({
-                                "opacity": 1
-                            });
-                        }
-                    }, 3500);
-                }
-            }
-        },
-        onLeave: function (index, nextIndex, direction) {
-            console.log("onleave: " + index, "direction: " + direction);
-            resetAll();
-            $(".downArrow").css({
-                "display": "none"
-            });
-            $(".readPaper").css({
-                "display": "none",
-                "opacity": 0
-            });
-            $("#section-" + index).css({
-                "opacity": 0,
-                "z-index": 0
-            });
-            if (direction == "up") {
-                ga("send", {
-                    "hitType": "event",
-                    "eventCategory": "動畫回上一頁",
-                    "eventAction": "scroll",
-                    "eventLabel": "第幾" + index + "張,回頭看"
-                });
-            }
-            if ($("#indicator").css("opacity") != 1) {
-                $("#indicator").css({
-                    "opacity": 1
-                });
-                $('#indicator-bar').css('width', '0');
-            }
-            if (index == 1) {
-                $(".fixed_pic").css("opacity", "1");
-            }
-            if (index == 2) {
-                $(".voice-state img").removeClass("blink");
-            }
-            if (index == 4) {
-                if (direction == "up") {
-                    startCurFrame = 0;
-                    endCurFrame = 0;
-                    ctx_2.clearRect(0, 0, stage_2.width, stage_2.height);
-                    $(".stage-2-words").removeAttr('style');
-                    $("#stage-2").removeAttr('style');
-                } else {
-                    $("#section-4").css({
-                        "transition": "3s"
-                    });
-                    SIDdrawEnd = setInterval(drawEnd, 100);
-                    $.fn.fullpage.setScrollingSpeed(2333);
-                }
-            }
-            if (index == 5) {
-                ctx_3.clearRect(0, 0, stage_3.width + 100, stage_3.height + 100);
-                ctx_3.globalAlpha = 1;
-                if (w >= 1024) {
-                    walk1X = 880;
-                    walk1Y = 425;
-                } else if (w >= 768 && w < 1024) {
-                    walk1X = 550;
-                    walk1Y = 660;
-                } else {
-                    walk1X = 390;
-                    walk1Y = 575;
-                }
-                if (w >= 1024) {
-                    walkBackX = 560;
-                    walkBackY = 417;
-                } else if (w >= 768 && w < 1024) {
-                    walkBackX = 350;
-                    walkBackY = 670;
-                } else {
-                    walkBackX = 180;
-                    walkBackY = 565;
-                }
-            }
-            if (index == 6) {
-                if (direction == "up") {
-                    kitchenArrow = 0;
-                    ctx_4.clearRect(kitchenX, kitchenY, stage_4.width, stage_4.height);
-                    $(".stage-4-words p").removeAttr('style');
-                    $("#stage-4").removeAttr('style');
-                }
-            }
-            if (index == 7) {
-                if (direction == "up") {
-                    carArrow = 0;
-                    clearInterval(SIDdrawCar);
-                    ctx_5.clearRect(0, 0, stage_5.width, stage_5.height);
-                    $("#stage-5").removeAttr('style');
-                    $(".stage-5-words p").removeAttr('style');
-                    $(".stage-5-words h2").removeAttr('style');
-                } else {
-                    $("#stage-5").css({
-                        "transform": "translate(75%, 20%)",
-                        "opacity": "0"
-                    });
-                }
-            }
-            if (index == 8) {
-                if (direction == "up") {
-                    ctx_6.clearRect(0, 0, stage_6.width, stage_6.height);
-                    ctx_6_1.clearRect(0, 0, stage_6_1.width, stage_6_1.height);
-                    ctx_6_2.clearRect(0, 0, stage_6_2.width, stage_6_2.height);
-                    ctx_6_3.clearRect(0, 0, stage_6_3.width, stage_6_3.height);
-                    ctx_6_4.clearRect(0, 0, stage_6_4.width, stage_6_4.height);
-                    $("#stage-6").removeAttr('style');
-                    $("#stage-6_1").removeAttr('style');
-                    $("#stage-6_2").removeAttr('style');
-                    $("#stage-6_3").removeAttr('style');
-                    $("#stage-6_3_bg").removeAttr('style');
-                    $("#stage-6_4").removeAttr('style');
-                    $(".stage-6-words p").eq(0).removeAttr('style');
-                    $(".stage-6-words p").eq(1).removeAttr('style');
-                    foodInfoEnd = 0;
-                    foodSafeEnd = 0;
-                    speechEnd = 0;
-                } else {
-                    $("#section-8").css({
-                        "transition": "3s"
-                    });
-                    $("#stage-6_3, #stage-6_3_bg").css({
-                        "opacity": "0",
-                        "transform": "translate(0, -130px)"
-                    });
-                    $(".stage-6-words p").eq(1).css({
-                        "opacity": "0",
-                        "transform": 'translate(0, -70px)'
-                    });
-                    setTimeout(function () {
-                        $("#stage-6_4").css({
-                            "opacity": "0",
-                            "transform": "translate(0, -140px)"
-                        });
-                    }, 111);
-                }
-            }
-            if (index == 9) {
-                if (direction == "up") {
-                    ctx_7.clearRect(0, 0, stage_7.width, stage_7.height);
-                    $("#stage-7").removeAttr('style');
-                    $(".stage-7-words").removeAttr('style');
-                }
-            }
-            if (index == 10) {
-                if (direction == "up") {
-                    bedCurFrame = 0;
-                    ctx_8.clearRect(0, 0, stage_8.width, stage_8.height);
-                    $(".stage-8-words p").removeAttr('style');
-                    $(".stage-8-words h2").removeAttr('style');
-                    $("#stage-8").removeAttr('style');
-                }
-            }
-            if (index == 11) {
-                if (direction == "up") {
-                    smokeArrow = 0;
-                    ctx_9.clearRect(0, 0, stage_9.width, stage_9.height);
-                    ctx_9_bg.clearRect(0, 0, stage_9_bg.width + 300, stage_9_bg.height + 300);
-                    $(".stage-9-words p").removeAttr('style');
-                    $("#stage-9").removeAttr('style');
-                    $("#stage-9_bg").removeAttr('style');
-                }
-            }
-            if (index == 12) {
-                if (direction == "up") {
-                    toWave = 0;
-                    thanksIndex = 0;
-                    waveCurFrame = 0;
-                    ctx_10.clearRect(0, 0, stage_10.width, stage_10.height);
-                    $(".thanks").removeAttr('style');
-                    $(".stage-10-words").removeAttr('style');
-                    $(".stage-10-words p").removeAttr('style');
-                } else {
-                    if (thanksIndex == 1 && waveCurFrame > 22) {
-                        SIDdrawWave = setInterval(drawWave, 125);
-                    }
-                    $(".thanks").eq(thanksIndex).css({
-                        "opacity": "0",
-                        "transform": "translateX(-10%)"
-                    });
-                }
-            }
-            if (index == 13) {
-                if (direction == "up") {
-                    ctx_11.clearRect(0, 0, stage_11.width, stage_11.height);
-                    ctx_11_1.clearRect(0, 0, stage_11_1.width, stage_11_1.height);
-                    $("#stage-11").removeAttr('style');
-                    $("#stage-11_1").removeAttr('style');
-                    $(".stage-11-words p").removeAttr('style');
-                }
-            }
-            if (index == 14) {
-                if (direction == "up") {
-                    washCurFrame = 0;
-                    ctx_12.clearRect(0, 0, stage_12.width, stage_12.height);
-                    $(".stage-12-words p").removeAttr('style');
-                    $("#stage-12").removeAttr('style');
-                }
-            }
-            if (index == 15) {
-                if (direction == "up") {
-                    $(".stage-13-words h2").removeAttr('style');
-                    $(".stage-13-words p").removeAttr('style');
-                    $(".stage-13").removeAttr('style');
-                }
-            }
-            if (nextIndex == 3) {
-                $(".fixed_pic").css("opacity", "1");
-            }
-            if (nextIndex == 4) {
-                $(".fixed_pic").css("opacity", "0");
-            }
-        }
-    });
+    //             $(".stage-12-words p").eq(0).css({
+    //                 "opacity": 1
+    //             });
+    //             setTimeout(function () {
+    //                 $(".stage-12-words p").eq(1).css({
+    //                     "opacity": 1
+    //                 });
+    //                 $("#stage-12").css({
+    //                     "opacity": 1
+    //                 });
+    //                 SIDdrawWash = setInterval(drawWash, 125);
+    //             }, 1000);
+    //             setTimeout(function () {
+    //                 $(".stage-12-words p").eq(2).css({
+    //                     "opacity": 1
+    //                 });
+    //             }, 2000);
+    //         }
+    //         if (index == 15) {
+    //             //reset stage-12
+    //             ctx_12.clearRect(0, 0, stage_12.width, stage_12.height);
+    //             washCurFrame = 0;
+    //             $(".stage-12-words p").removeAttr('style');
+    //             $("#stage-12").removeAttr('style');
+    //             if(toSkip == false) {
+    //                 $(".stage-13").eq(0).css({
+    //                     "opacity": "1"
+    //                 });
+    //                 $(".stage-13-words").css({
+    //                     "transform": "translate(0, -20%)",
+    //                     "opacity": 1
+    //                 });
+    //                 setTimeout(function () {
+    //                     $(".stage-13").eq(1).css({
+    //                         "opacity": "1"
+    //                     });
+    //                     $(".stage-13-words h2").css({
+    //                         "opacity": "1"
+    //                     });
+    //                 }, 1666);
+    //                 setTimeout(function () {
+    //                     $(".stage-13").eq(2).css({
+    //                         "opacity": "1"
+    //                     });    
+    //                     if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
+    //                         $(".readPaper").css({
+    //                             "display": "block",
+    //                         });                        
+    //                     }
+    //                 }, 3333);
+    //                 setTimeout(function(){
+    //                     if ($(window).scrollTop() < $(".content").eq(0).offset().top) {
+    //                         $(".readPaper").css({
+    //                             "opacity": 1,
+    //                         });                        
+    //                     }  
+    //                 }, 3500)              
+    //             }
+    //         }
+    //     },
+    //     onLeave: function (index, nextIndex, direction) {
+    //         console.log("onleave: "+index ,"direction: "+ direction)
+    //         resetAll();
+    //         $(".downArrow").css({
+    //             "display": "none"
+    //         });
+    //         $(".readPaper").css({
+    //             "display": "none",
+    //             "opacity": 0,
+    //         });
+    //         $("#section-" + index).css({
+    //             "opacity": 0,
+    //             "z-index": 0
+    //         });
+    //         if (direction == "up") {
+    //             ga("send", {
+    //                 "hitType": "event",
+    //                 "eventCategory": "動畫回上一頁",
+    //                 "eventAction": "scroll",
+    //                 "eventLabel": "第幾" + index + "張,回頭看"
+    //             });
+    //         }
+    //         if ($("#indicator").css("opacity") != 1) {
+    //             $("#indicator").css({
+    //                 "opacity": 1
+    //             });
+    //             $('#indicator-bar').css('width', '0');
+    //         }
+    //         if (index == 1) {
+    //             $(".fixed_pic").css("opacity", "1");
+    //         }
+    //         if (index == 2) {
+    //             $(".voice-state img").removeClass("blink");
+    //         }
+    //         if (index == 4) {
+    //             if (direction == "up") {
+    //                 startCurFrame = 0;
+    //                 endCurFrame = 0;
+    //                 ctx_2.clearRect(0, 0, stage_2.width, stage_2.height);
+    //                 $(".stage-2-words").removeAttr('style');
+    //                 $("#stage-2").removeAttr('style');
+    //             } else {
+    //                 $("#section-4").css({
+    //                     "transition": "3s"
+    //                 });
+    //                 SIDdrawEnd = setInterval(drawEnd, 100);
+    //                 $.fn.fullpage.setScrollingSpeed(2333);
+    //             }
+    //         }
+    //         if (index == 5) {
+    //             ctx_3.clearRect(0, 0, stage_3.width+100, stage_3.height+100);
+    //             ctx_3.globalAlpha = 1;
+    //             if (w >= 1024) {
+    //                 walk1X = 880;
+    //                 walk1Y = 425;
+    //             } else if (w >= 768 && w < 1024) {
+    //                 walk1X = 550;
+    //                 walk1Y = 660;
+    //             } else {
+    //                 walk1X = 390;
+    //                 walk1Y = 575;
+    //             }
+    //             if (w >= 1024) {
+    //                 walkBackX = 560;
+    //                 walkBackY = 417;
+    //             } else if (w >= 768 && w < 1024) {
+    //                 walkBackX = 350;
+    //                 walkBackY = 670;        
+    //             } else {
+    //                 walkBackX = 180;
+    //                 walkBackY = 565;
+    //             }
+    //         }
+    //         if (index == 6) {
+    //             if (direction == "up") {
+    //                 kitchenArrow = 0;
+    //                 ctx_4.clearRect(kitchenX, kitchenY, stage_4.width, stage_4.height);
+    //                 $(".stage-4-words p").removeAttr('style');
+    //                 $("#stage-4").removeAttr('style');
+    //             }
+    //         }
+    //         if (index == 7) {
+    //             if (direction == "up") {
+    //                 carArrow = 0;
+    //                 clearInterval(SIDdrawCar);
+    //                 ctx_5.clearRect(0, 0, stage_5.width, stage_5.height);
+    //                 $("#stage-5").removeAttr('style');
+    //                 $(".stage-5-words p").removeAttr('style');
+    //                 $(".stage-5-words h2").removeAttr('style');
+    //             } else {
+    //                 $("#stage-5").css({
+    //                     "transform": "translate(75%, 20%)",
+    //                     "opacity": "0"
+    //                 });
+    //             }
+    //         }
+    //         if (index == 8) {
+    //             if (direction == "up") {
+    //                 ctx_6.clearRect(0, 0, stage_6.width, stage_6.height);
+    //                 ctx_6_1.clearRect(0, 0, stage_6_1.width, stage_6_1.height);
+    //                 ctx_6_2.clearRect(0, 0, stage_6_2.width, stage_6_2.height);
+    //                 ctx_6_3.clearRect(0, 0, stage_6_3.width, stage_6_3.height);
+    //                 ctx_6_4.clearRect(0, 0, stage_6_4.width, stage_6_4.height);
+    //                 $("#stage-6").removeAttr('style');
+    //                 $("#stage-6_1").removeAttr('style');
+    //                 $("#stage-6_2").removeAttr('style');
+    //                 $("#stage-6_3").removeAttr('style');
+    //                 $("#stage-6_3_bg").removeAttr('style');
+    //                 $("#stage-6_4").removeAttr('style');
+    //                 $(".stage-6-words p").eq(0).removeAttr('style');
+    //                 $(".stage-6-words p").eq(1).removeAttr('style');
+    //                 foodInfoEnd = 0;
+    //                 foodSafeEnd = 0;
+    //                 speechEnd = 0;
+    //             } else {
+    //                 $("#section-8").css({
+    //                     "transition": "3s"
+    //                 });
+    //                 $("#stage-6_3, #stage-6_3_bg").css({
+    //                     "opacity": "0",
+    //                     "transform": "translate(0, -130px)"
+    //                 });
+    //                 $(".stage-6-words p").eq(1).css({
+    //                     "opacity": "0",
+    //                     "transform": 'translate(0, -70px)'
+    //                 });
+    //                 setTimeout(function () {
+    //                     $("#stage-6_4").css({
+    //                         "opacity": "0",
+    //                         "transform": "translate(0, -140px)"
+    //                     });
+    //                 }, 111);
+    //             }
+    //         }
+    //         if (index == 9) {
+    //             if (direction == "up") {
+    //                 ctx_7.clearRect(0, 0, stage_7.width, stage_7.height);
+    //                 $("#stage-7").removeAttr('style');
+    //                 $(".stage-7-words").removeAttr('style');
+    //             }
+    //         }
+    //         if (index == 10) {
+    //             if (direction == "up") {
+    //                 bedCurFrame = 0;
+    //                 ctx_8.clearRect(0, 0, stage_8.width, stage_8.height);
+    //                 $(".stage-8-words p").removeAttr('style');
+    //                 $(".stage-8-words h2").removeAttr('style');
+    //                 $("#stage-8").removeAttr('style');
+    //             }
+    //         }
+    //         if (index == 11) {
+    //             if (direction == "up") {
+    //                 smokeArrow = 0;
+    //                 ctx_9.clearRect(0, 0, stage_9.width, stage_9.height);
+    //                 ctx_9_bg.clearRect(0, 0, stage_9_bg.width + 300, stage_9_bg.height + 300);
+    //                 $(".stage-9-words p").removeAttr('style');
+    //                 $("#stage-9").removeAttr('style');
+    //                 $("#stage-9_bg").removeAttr('style');
+    //             }
+    //         }
+    //         if (index == 12) {
+    //             if (direction == "up") {
+    //                 toWave = 0;
+    //                 thanksIndex = 0;
+    //                 waveCurFrame = 0;
+    //                 ctx_10.clearRect(0, 0, stage_10.width, stage_10.height);
+    //                 $(".thanks").removeAttr('style');
+    //                 $(".stage-10-words").removeAttr('style');
+    //                 $(".stage-10-words p").removeAttr('style');
+    //             } else {
+    //                 if (thanksIndex == 1 && waveCurFrame > 22) {
+    //                     SIDdrawWave = setInterval(drawWave, 125);
+    //                 }
+    //                 $(".thanks").eq(thanksIndex).css({
+    //                     "opacity": "0",
+    //                     "transform": "translateX(-10%)"
+    //                 });
+    //             }
+    //         }
+    //         if (index == 13) {
+    //             if (direction == "up") {
+    //                 ctx_11.clearRect(0, 0, stage_11.width, stage_11.height);
+    //                 ctx_11_1.clearRect(0, 0, stage_11_1.width, stage_11_1.height);
+    //                 $("#stage-11").removeAttr('style');
+    //                 $("#stage-11_1").removeAttr('style');
+    //                 $(".stage-11-words p").removeAttr('style');
+    //             }
+    //         }
+    //         if (index == 14) {
+    //             if (direction == "up") {
+    //                 washCurFrame = 0;
+    //                 ctx_12.clearRect(0, 0, stage_12.width, stage_12.height);
+    //                 $(".stage-12-words p").removeAttr('style');
+    //                 $("#stage-12").removeAttr('style');
+    //             }
+    //         }
+    //         if (index == 15) {
+    //             if (direction == "up") {
+    //                 $(".stage-13-words h2").removeAttr('style');
+    //                 $(".stage-13-words p").removeAttr('style');
+    //                 $(".stage-13").removeAttr('style');
+    //             }
+    //         }
+    //         if (nextIndex == 3) {
+    //             $(".fixed_pic").css("opacity", "1");
+    //         }
+    //         if (nextIndex == 4) {
+    //             $(".fixed_pic").css("opacity", "0");
+    //         }
+    //     }
+    // });
     $(".downArrow").click(function (e) {
         e.preventDefault();
         $.fn.fullpage.moveSectionDown();
