@@ -394,10 +394,13 @@ $(document).ready(function () {
         }
         if(scroll_now > $("#movie-1").offset().top - h*0.5 && scroll_now < $("#movie-1").offset().top + h*0.5){
             moviePlay(1);
+            console.log('movie play')
         }
         if(scroll_now > $("#movie-1").offset().top + h*0.2 || scroll_now <  $("#movie-1").offset().top - h*0.8){
             moviePause(1);
+            console.log("movie pause")
         }
+        console.log(scroll_now)
     });
     $('.volume[data-target="1"], .volume-text[data-target="1"]').click(function(){
         movieVolume(1);
@@ -1092,7 +1095,6 @@ $(document).ready(function () {
         ctx_7.drawImage(room, roomSrcX, roomSrcY, roomWidth, roomHeight, roomX, roomY, roomWidth, roomHeight);
         ctx_7.font = "14px Arial";
         if (roomCurFrame > 4) {
-            w >= 1024 ? ctx_7.fillText("爸爸進房間囉", 250, 282) : ctx_7.fillText("爸爸進房間囉", 175, 282);
             if (roomCurFrame == 23) {
                 $("#music-switch")[0].play(0);
             } else if (roomCurFrame == roomFrameCount - 1) {
@@ -1472,7 +1474,6 @@ $(document).ready(function () {
                 $(".fullpage").css({
                     "height": "100%"
                 })
-                $(".skip").css("display","block")
                 start.src = "src/image/animate-sprite/stage-2-start.jpg";
                 end.src = "src/image/animate-sprite/stage-2-end.jpg";       
                 toSkip = false;     
@@ -1525,6 +1526,9 @@ $(document).ready(function () {
                 table.src = "src/image/animate-sprite/stage-9-bg.png";
                 present.src = "src/image/animate-sprite/stage-11-bg.png";
                 $(".page-black").eq(1).removeAttr('style');
+                $(".skip").css({
+                    "display": "block",
+                })
                 $("#stage-2").css({
                     "transform": "translateX(0)",
                     "opacity": "1"
@@ -1845,7 +1849,6 @@ $(document).ready(function () {
                         }  
                     }, 3500)              
                 }
-
             }
         },
         onLeave: function (index, nextIndex, direction) {
@@ -1922,10 +1925,12 @@ $(document).ready(function () {
                 }
             }
             if (index == 6) {
-                kitchenArrow = 0;
-                ctx_4.clearRect(kitchenX, kitchenY, stage_4.width, stage_4.height);
-                $(".stage-4-words p").removeAttr('style');
-                $("#stage-4").removeAttr('style');
+                if (direction == "up") {
+                    kitchenArrow = 0;
+                    ctx_4.clearRect(kitchenX, kitchenY, stage_4.width, stage_4.height);
+                    $(".stage-4-words p").removeAttr('style');
+                    $("#stage-4").removeAttr('style');
+                }
             }
             if (index == 7) {
                 if (direction == "up") {
@@ -1981,30 +1986,30 @@ $(document).ready(function () {
                 }
             }
             if (index == 9) {
-                // if (direction == "up") {
+                if (direction == "up") {
                     ctx_7.clearRect(0, 0, stage_7.width, stage_7.height);
                     $("#stage-7").removeAttr('style');
                     $(".stage-7-words").removeAttr('style');
-                // }
+                }
             }
             if (index == 10) {
-                // if (direction == "up") {
+                if (direction == "up") {
                     bedCurFrame = 0;
                     ctx_8.clearRect(0, 0, stage_8.width, stage_8.height);
                     $(".stage-8-words p").removeAttr('style');
                     $(".stage-8-words h2").removeAttr('style');
                     $("#stage-8").removeAttr('style');
-                // }
+                }
             }
             if (index == 11) {
-                // if (direction == "up") {
+                if (direction == "up") {
                     smokeArrow = 0;
                     ctx_9.clearRect(0, 0, stage_9.width, stage_9.height);
                     ctx_9_bg.clearRect(0, 0, stage_9_bg.width + 300, stage_9_bg.height + 300);
                     $(".stage-9-words p").removeAttr('style');
                     $("#stage-9").removeAttr('style');
                     $("#stage-9_bg").removeAttr('style');
-                // }
+                }
             }
             if (index == 12) {
                 if (direction == "up") {
@@ -2026,28 +2031,28 @@ $(document).ready(function () {
                 }
             }
             if (index == 13) {
-                // if (direction == "up") {
+                if (direction == "up") {
                     ctx_11.clearRect(0, 0, stage_11.width, stage_11.height);
                     ctx_11_1.clearRect(0, 0, stage_11_1.width, stage_11_1.height);
                     $("#stage-11").removeAttr('style');
                     $("#stage-11_1").removeAttr('style');
                     $(".stage-11-words p").removeAttr('style');
-                // }
+                }
             }
             if (index == 14) {
-                // if (direction == "up") {
+                if (direction == "up") {
                     washCurFrame = 0;
                     ctx_12.clearRect(0, 0, stage_12.width, stage_12.height);
                     $(".stage-12-words p").removeAttr('style');
                     $("#stage-12").removeAttr('style');
-                // }
+                }
             }
             if (index == 15) {
-                // if (direction == "up") {
+                if (direction == "up") {
                     $(".stage-13-words h2").removeAttr('style');
                     $(".stage-13-words p").removeAttr('style');
                     $(".stage-13").removeAttr('style');
-                // }
+                }
             }
             if (nextIndex == 3) {
                 $(".fixed_pic").css("opacity", "1");
