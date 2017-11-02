@@ -1448,6 +1448,9 @@ $(document).ready(function () {
         $(".stage-12-words p").removeAttr('style');
         $("#stage-12").removeAttr('style');       
         console.log("stageStateClear")     
+        $(".stage-13-words h2").removeAttr('style');
+        $(".stage-13-words p").removeAttr('style');
+        $(".stage-13").removeAttr('style');        
     }
 
     function illAnime () {
@@ -2114,7 +2117,7 @@ $(document).ready(function () {
             $("html, body").css({
                  "overflow-x": "hidden",
                  "height": "initail"
-            });
+            });        
             stageStateReset()     
         }
     });
