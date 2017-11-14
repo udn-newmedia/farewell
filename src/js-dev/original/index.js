@@ -121,7 +121,7 @@ $(document).ready(function () {
         }
     }
     // for FB-app
-    if (isFacebookApp()) {
+    if (isFacebookApp(148)) {
         $(".stage-6-words p").eq(0).css({
             "top" : "15%",
             "left": "-15%",
