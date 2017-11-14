@@ -62,8 +62,9 @@ $(document).ready(function () {
     function isFacebookApp(version) {
         var ua = navigator.userAgent || navigator.vendor || window.opera;
         // return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
-        var isFB = ua.indexOf('FBAV/');
-        if (ua.slice(isFB + 5, isFB + 8) < version) {
+        var findFBAV = ua.indexOf('FBAV/');
+        var FBversion_now = Number(ua.slice(findFBAV + 5, findFBAV + 8));
+        if (FBversion_now < version) {
             return true;
         } else {
             return false;
@@ -121,7 +122,7 @@ $(document).ready(function () {
         }
     }
     // for FB-app
-    if (isFacebookApp()) {
+    if (isFacebookApp(148)) {
         $(".stage-6-words p").eq(0).css({
             "top": "15%",
             "left": "-15%"

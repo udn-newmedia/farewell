@@ -62,8 +62,9 @@ $(document).ready(function () {
     function isFacebookApp(version) {
         var ua = navigator.userAgent || navigator.vendor || window.opera;
         // return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
-        var isFB =ua.indexOf('FBAV/')
-        if(ua.slice(isFB + 5, isFB + 8) < version){
+        var findFBAV =ua.indexOf('FBAV/')
+        var FBversion_now = Number(ua.slice(findFBAV + 5, findFBAV + 8))
+        if(FBversion_now < version){
             return true;
         } else {
             return false;
@@ -398,11 +399,9 @@ $(document).ready(function () {
         }
         if(scroll_now > articleMovie - (h*0.5) && scroll_now < articleMovie + (h*0.5)){
             moviePlay(1);
-            console.log('movie play')
         }
         if(scroll_now > articleMovie + (h * 0.2) || scroll_now <  articleMovie - (h*0.8)){
             moviePause(1);
-            console.log("movie pause")
         }
         if($(window).scrollTop() == 0){
             if(readed == true){
@@ -410,7 +409,6 @@ $(document).ready(function () {
                 $(".fullpage").css({
                     'display': 'block'
                 })
-                console.log("reBuild")
             }
         }
     });
@@ -2173,5 +2171,4 @@ $(document).ready(function () {
             stageStateReset()            
         }
     });    
-    console.log(toFire)
 });
