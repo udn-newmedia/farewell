@@ -59,10 +59,12 @@ $(document).ready(function () {
 
     ver = iOSversion();
 
-    function isFacebookApp() {
-        if(iOS == true){
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            return ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1;
+    function isFacebookApp(version) {
+        var ua = navigator.userAgent || navigator.vendor || window.opera;
+        // return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+        var isFB =ua.indexOf('FBAV/')
+        if(ua.slice(isFB + 5, isFB + 8) < version){
+            return true;
         } else {
             return false;
         }

@@ -59,10 +59,12 @@ $(document).ready(function () {
 
     ver = iOSversion();
 
-    function isFacebookApp() {
-        if (iOS == true) {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            return ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1;
+    function isFacebookApp(version) {
+        var ua = navigator.userAgent || navigator.vendor || window.opera;
+        // return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+        var isFB = ua.indexOf('FBAV/');
+        if (ua.slice(isFB + 5, isFB + 8) < version) {
+            return true;
         } else {
             return false;
         }
@@ -1382,14 +1384,17 @@ $(document).ready(function () {
         endCurFrame = 0;
         $("#stage-2").removeAttr('style');
         $(".stage-2-words").removeAttr('style');
-        ctx_3.clearRect(0, 0, stage_3.width, stage_3.height);
+        ctx_3.clearRect(0, 0, stage_3.width + 100, stage_3.height + 100);
         ctx_3.globalAlpha = 1;
         if (w >= 1024) {
             walk1X = 880;
-            walkBackX = 560;
+            walk1Y = 425;
+        } else if (w >= 768 && w < 1024) {
+            walk1X = 550;
+            walk1Y = 660;
         } else {
             walk1X = 390;
-            walkBackX = 180;
+            walk1Y = 575;
         }
         $(".stage-3-words").removeAttr("style");
         ctx_4.clearRect(0, 0, stage_4.width, stage_4.height);
@@ -1465,7 +1470,7 @@ $(document).ready(function () {
                 $.fn.fullpage.setAllowScrolling(false);
                 $("#section-" + index).css({
                     "opacity": "1",
-                    "z-index": 50
+                    "z-index": "50"
                 });
                 $("#head").addClass('Bgc-TP');
                 bar_witdh = index / ($(".fullpage").children().length - 1) * 100;
@@ -2096,8 +2101,13 @@ $(document).ready(function () {
         toSkip = true;
         readed = true;
         resetAll();
+        $('#movie-1').attr("src", "src/image/video.mp4?v=3");
         if (toFire == true) {
             toFire = false;
+            $("#section-" + animeIndex).css({
+                "opacity": 0,
+                "z-index": 0
+            });
             setTimeout(function () {
                 toFire = true;
             }, 1222);
@@ -2127,13 +2137,18 @@ $(document).ready(function () {
         toSkip = true;
         readed = true;
         resetAll();
+        $('#movie-1').attr("src", "src/image/video.mp4?v=3");
         if (toFire == true) {
             toFire = false;
             setTimeout(function () {
                 toFire = true;
             }, 1222);
+            $("#section-" + animeIndex).css({
+                "opacity": 0,
+                "z-index": 0
+            });
             $(this).css({ "display": "none", "opacity": 0 });
-            $('.skip').css({ "display": "none", "opacity": 0 });
+            $('.skip').css({ "display": "none" });
             $(".fullpage").css({
                 'height': "0"
             });
